@@ -1,0 +1,1 @@
+***Game Central Store*** es una aplicación web fullstack desarrollada como proyecto final del bootcamp de Desarrollo Fullstack. Esta tienda online de videojuegos permite a los usuarios explorar, buscar y comprar videojuegos de diversas plataformas y géneros.
