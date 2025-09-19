@@ -1,0 +1,18 @@
+.nav{
+    color:var(--bs-secondary-hover);
+}
+.nav-link{
+    color:var(--bs-light);
+}
+.nav-link.active{
+    color:var(--bs-secondary-hover);
+}
+.nav-link:hover{
+    color:var(--bs-secondary-hover);
+    transition: ease .25s;
+}
+.active{
+    font-weight: bold;
+    color: var(--bs-secondary-hover);
+
+}

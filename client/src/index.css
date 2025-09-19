@@ -1,6 +1,7 @@
 :root {
   /* Colores base */
     --bs-dark: #1E202C;
+    --bs-carbon-dark: #31323E;
     --bs-primary: #29B474;
     --bs-primary-hover: #0AE98A;
     --bs-primary-border: #29B474;
@@ -8,14 +9,14 @@
     --bs-secondary-hover: #A782E9;
     --bs-secondary-border: #60519B;
     --bs-light: #FFFFFF;
+    --bs-nav-link-color:#A782E9;
   }
   
   body {
     background-color: var(--bs-dark);
     color: var(--bs-light);
-    padding: 20px;
   }
-  
+ 
   .btn-primary {
     background-color: var(--bs-primary);
     border-color: var(--bs-primary-border);
