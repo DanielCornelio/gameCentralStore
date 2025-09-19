@@ -8,7 +8,8 @@ function App() {
 
   return (
     <>
-      <Button variant='secondary'>Hola</Button>
+      <Button>Hola</Button>
+  
     </>
   )
 }
