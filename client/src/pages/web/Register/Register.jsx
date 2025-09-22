@@ -3,10 +3,12 @@ import { Button, Col, Container, FloatingLabel, Form, FormGroup, Stack } from 'r
 import { Link } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import './Register.scss';
+import { TermsModal } from '../../../components'
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
 
   const togglePasswordVisibility = (e) => {
@@ -16,6 +18,12 @@ export const Register = () => {
   const toggleConfirmPasswordVisibility = (e) => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+
+  const handleTermsClick = (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+
   return (
     <Container className="register d-flex justify-content-center align-items-center">
       <Col sm={12} md={5}>
@@ -24,7 +32,7 @@ export const Register = () => {
           <Stack gap={4}>
             {/* Email */}
             <FloatingLabel controlId="floatingInput" label="Ingresa tu email">
-              <Form.Control type="email" placeholder="name@example.com" />
+              <Form.Control type="email" placeholder="name@example.com" autoComplete='email'/>
             </FloatingLabel>
 
             {/* Password */}
@@ -32,6 +40,7 @@ export const Register = () => {
               <Form.Control
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                autoComplete="new-password" 
               />
               <span
                 variant="btn-link"
@@ -43,10 +52,11 @@ export const Register = () => {
             </FloatingLabel>
 
             {/* Confirm Password */}
-            <FloatingLabel controlId="floatingPassword" label="Confirma tu contraseña" className="d-flex justify-content-end align-items-center">
+            <FloatingLabel controlId="floatingConfirmPassword" label="Confirma tu contraseña" className="d-flex justify-content-end align-items-center">
               <Form.Control
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Password"
+                autoComplete="new-password" 
               />
               <span
                 variant="btn-link"
@@ -57,10 +67,15 @@ export const Register = () => {
               </span>
             </FloatingLabel>
 
-            <FormGroup>
-              <Form.Check.Input type="checkbox" className='check' aria-label="terms" />
-              <Form.Check.Label className='ms-2' aria-label="terms">Acepto los <Link className='btn-link' onClick={() => setShowModal(true)}>términos y condiciones</Link></Form.Check.Label>
-            </FormGroup>
+            <Form.Check>
+              <Form.Check.Input type="checkbox" id='check-terms' className='check'/>
+              <Form.Check.Label className='ms-2' htmlFor='check-terms'>
+                Acepto los{' '}
+                <Link className='btn-link' onClick={() => setShowModal(true)}>
+                  términos y condiciones
+                </Link>
+              </Form.Check.Label>
+            </Form.Check>
 
             <div className="d-grid">
               <Button size="lg" type="submit">
@@ -76,6 +91,7 @@ export const Register = () => {
           </Stack>
         </Form>
       </Col>
+      <TermsModal showModal={showModal} setShowModal={setShowModal} />
     </Container>
   )
 }
