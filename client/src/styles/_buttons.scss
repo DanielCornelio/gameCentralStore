@@ -1,0 +1,21 @@
+@use "./colors" as *;
+
+.btn-primary {
+  background-color: $primary;
+  border: 1px solid $primary;
+  color: $text-light;
+
+  &:hover {
+    background-color: $primary-hover;
+    border: 1px solid $primary-hover;
+    text-shadow: 2px 2px 2px $primary;
+  }
+}
+
+.btn-link {
+  color: $secondary-hover;
+
+  &:hover{
+    color: $secondary-hover;
+  }
+}
