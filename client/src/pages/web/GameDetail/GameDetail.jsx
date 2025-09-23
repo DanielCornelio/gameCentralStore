@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Container, Row, Stack } from "react-bootstrap";
-import { GameDetailCard, SectionTitle } from "../../../components";
+import { Button, Card, Col, Container, Row, Stack } from "react-bootstrap";
+import { GameDetailCard, SectionTitle, RatingComments } from "../../../components";
 import { CommentCard } from "../../../components/web/CommentCard/CommentCard";
 
 export const GameDetail = () => {
@@ -9,8 +9,8 @@ export const GameDetail = () => {
       <GameDetailCard />
       <SectionTitle title="Comentarios" />
       <Row>
-        <Col md={4}>
-        
+        <Col md={3}>
+          <RatingComments />
         </Col>
         <Col>
           <Stack gap={4}>
