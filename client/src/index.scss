@@ -1,0 +1,10 @@
+@use "./styles/colors" as *;
+@use "./styles/forms" as *;
+@use "./styles/buttons" as *;
+
+body{
+    background-color: $background-dark-web;
+    color: $text-light;
+}
+
+

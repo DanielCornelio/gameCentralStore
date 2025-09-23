@@ -1,11 +1,9 @@
 import React from 'react'
 
-
-const AdminLayout = () => {
+export const Games = () => {
   return (
     <div>
+      
     </div>
   )
 }
-
-export default AdminLayout

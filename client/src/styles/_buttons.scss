@@ -1,0 +1,41 @@
+@use "./colors" as *;
+
+.btn-primary {
+  background-color: $primary;
+  border: 1px solid $primary;
+  color: $text-light;
+
+  &:hover {
+    background-color: $primary-hover;
+    border: 1px solid $primary-hover;
+    text-shadow: 2px 2px 2px $primary;
+  }
+}
+
+.btn-secondary {
+  background-color: $secondary;
+  border: 1px solid $secondary;
+  color: $text-light;
+
+  &:hover {
+    background-color: $secondary-hover;
+    border: 1px solid $secondary-hover;
+    text-shadow: 2px 2px 2px $secondary;
+  }
+}
+
+.btn-link {
+  color: $secondary-hover;
+
+  &:hover{
+    color: $secondary-hover;
+  }
+}
+
+.btn-close{
+  color: $text-light;
+  cursor: pointer;
+  &:hover{
+    color: $text-light
+  }
+}

@@ -1,0 +1,29 @@
+.navbar-brand{
+    color: var(--bs-light);
+}
+.navbar-color{
+    color:var(--bs-light) !important;
+
+}
+.nav{
+    color:var(--bs-secondary-hover);
+}
+
+.nav-link, .nav-link-color{
+    color:var(--bs-light) !important;
+}
+.nav-link-color.active{
+    font-weight: bold;
+    color: var(--bs-secondary-hover) !important;
+}
+.nav-link.active, .nav-link-color.active{
+    color:var(--bs-secondary-hover)!important;
+}
+.nav-link:hover{
+    color:var(--bs-secondary-hover);
+    transition: ease ;
+}
+.active{
+    font-weight: bold;
+    color: var(--bs-secondary-hover) !important;
+}
