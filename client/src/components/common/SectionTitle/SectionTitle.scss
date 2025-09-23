@@ -1,0 +1,6 @@
+@use '../../../styles/colors' as *;
+
+.section-title{
+    border-left: 6px solid $secondary-hover;
+    padding-left: 18px;
+}

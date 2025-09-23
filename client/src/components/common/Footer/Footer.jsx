@@ -1,14 +1,14 @@
 import { Container, Row, Col, Stack, Card, Nav, Navbar } from 'react-bootstrap';
 import { FaFacebook, FaApple, FaInstagram, FaGooglePlay } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
-import { MarketplaceCard } from '../../web/MarketplaceCard/MarketplaceCard';
+import { MarketplaceCard } from '../../../components/web/MarketplaceCard/MarketplaceCard';
 import { NavLink } from 'react-router-dom';
 import './Footer.css'
 
 
 export const Footer = () => {
   return (
-    <footer className="footer text-light" style={{ backgroundColor: '#191C1F' }}>
+    <footer className="footer bg-dark-base text-light">
       <Container className="py-4">
         <Row>
           <Col md={3} className="mb-3">
@@ -20,7 +20,7 @@ export const Footer = () => {
 
           <Col md={3} className="mb-3">
             <h5 className='mb-3'>Enlaces útiles</h5>
-            <Nav  className="flex-column text-light">
+            <Nav  className="flex-column">
               <Nav.Link as={NavLink} to="/" end className='px-0'>Inicio</Nav.Link>
               <Nav.Link as={NavLink} to="/login" className='px-0'>Login</Nav.Link>
               <Nav.Link as={NavLink} to="/service" className='px-0'>Servicios</Nav.Link>
@@ -37,7 +37,7 @@ export const Footer = () => {
 
           <Col md={3} className="mb-3">
             <h5 className='mb-4'>Síguenos</h5>
-            <Nav className="flex gap-3 text-light">
+            <Nav className="d-flex gap-3">
               <Nav.Link className='px-0'><FaFacebook size={30} /></Nav.Link>
               <Nav.Link className='px-0'><FaXTwitter size={30} /></Nav.Link>
               <Nav.Link className='px-0'><FaInstagram size={30} /></Nav.Link>

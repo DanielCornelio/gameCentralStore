@@ -1,11 +1,15 @@
 import React from 'react'
 import './WebLayout.css'
 import { Footer } from '../../components/common/Footer/Footer'
+import { TopBar } from '../../components/common/TopBar/TopBar'
+import { Outlet } from 'react-router-dom'
 
 export const WebLayout = () => {
   return (
     <div className='grid-container'>
-      <Footer/>
+      <TopBar />
+      <Outlet />
+      <Footer />
     </div>
   )
 }
