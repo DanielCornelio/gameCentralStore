@@ -1,0 +1,6 @@
+@use '../../../styles/colors' as *;
+
+.chip{
+    background-color: $secondary-hover !important;
+    color: $text-light;
+}

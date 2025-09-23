@@ -3,7 +3,7 @@ import './SectionTitle.scss'
 
 export const SectionTitle = ({title}) => {
   return (
-    <div className="section-title">
+    <div className="section-title my-5">
         <h2>{title}</h2>
     </div>
   )
