@@ -1,16 +1,12 @@
-import { useState } from 'react'
-import './App.css'
-import { Button } from 'react-bootstrap'
-
+import "./App.css";
+import Home from "./pages/web/Home";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <Button variant='secondary'>Hola</Button>
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
