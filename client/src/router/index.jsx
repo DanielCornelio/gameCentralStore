@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"; 
 import { Home } from "../pages/web/Home";
 import { WebLayout } from "../layouts/web/WebLayout";
-import { Login, Register} from "../pages/web";
+import { Login, Register, GameDetail} from "../pages/web";
 
 
 const routes = createBrowserRouter([
@@ -13,6 +13,10 @@ const routes = createBrowserRouter([
                 path: "/",
                 element: <Home />
             },
+            {
+                path:"/game",
+                element: <GameDetail />
+            }
         ]
     },
     {

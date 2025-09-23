@@ -1,0 +1,9 @@
+@use '../../../styles/colors' as *;
+
+
+.comment-card{
+    &-title{
+        color: $secondary-hover;
+    }
+
+}
