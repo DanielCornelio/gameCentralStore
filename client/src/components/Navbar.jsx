@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { GlobalContext } from "../context/GlobalContext";
+
+import { GlobalContext } from "../../context/GlobalContext";
+import "./Navbar.css";
 
 function Navbar() {
   const { user, setUser } = useContext(GlobalContext);
@@ -10,29 +12,33 @@ function Navbar() {
   };
 
   return (
-    <nav style={{ padding: "10px", backgroundColor: "#222", color: "#fff" }}>
-      <h2 style={{ display: "inline", marginRight: "20px" }}>🎮 GameCentral</h2>
-      <Link to="/" style={{ marginRight: "10px", color: "#fff" }}>Home</Link>
-      <Link to="/gallery" style={{ marginRight: "10px", color: "#fff" }}>Galería</Link>
-      <Link to="/create" style={{ marginRight: "10px", color: "#fff" }}>Crear</Link>
+    <header className="gc-navbar">
+      <div className="gc-navbar-inner">
+        <NavLink to="/" className="gc-brand">🎮 GameCentral</NavLink>
 
-      {user ? (
-        <>
-          <Link to="/profile" style={{ marginRight: "10px", color: "#0f0" }}>
-            Perfil
-          </Link>
-          <button onClick={handleLogout} style={{ background: "red", color: "white" }}>
-            Cerrar sesión
-          </button>
-        </>
-      ) : (
-        <>
-          <Link to="/login" style={{ marginRight: "10px", color: "#0ff" }}>Login</Link>
-          <Link to="/register" style={{ color: "#0ff" }}>Registro</Link>
-        </>
-      )}
-    </nav>
+        <nav className="gc-nav">
+          <NavLink to="/" end className="gc-nav-link">Home</NavLink>
+          <NavLink to="/gallery" className="gc-nav-link">Galería</NavLink>
+          <NavLink to="/create" className="gc-nav-link">Crear</NavLink>
+
+          {user ? (
+            <>
+              <NavLink to="/profile" className="gc-nav-link">Perfil</NavLink>
+              <button onClick={handleLogout} className="gc-btn gc-btn-logout">
+                Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login" className="gc-nav-link">Login</NavLink>
+              <NavLink to="/register" className="gc-nav-link">Registro</NavLink>
+            </>
+          )}
+        </nav>
+      </div>
+    </header>
   );
 }
 
 export default Navbar;
+

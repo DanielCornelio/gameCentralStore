@@ -1,10 +1,12 @@
 import { Container, Row, Col, Stack, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaGooglePlay, FaApple, FaFacebook, FaXTwitter, FaInstagram } from 'react-icons/fa6';
-import MarketplaceCard from '../MarketplaceCard/MarketplaceCard';
+import MarketplaceCard from "../../web/MarketplaceCard/MarketplaceCard";
+
+
 import './Footer.css';
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="footer-sticky bg-dark text-light mt-5">
       <Container className="py-4">
@@ -36,9 +38,9 @@ const Footer = () => {
           <Col md={3} className="mb-3">
             <h5 className='mb-4'>Síguenos</h5>
             <Nav className="d-flex gap-3">
-              <Nav.Link><FaFacebook size={30} /></Nav.Link>
-              <Nav.Link><FaXTwitter size={30} /></Nav.Link>
-              <Nav.Link><FaInstagram size={30} /></Nav.Link>
+              <Nav.Link className='px-0'><FaFacebook size={30} /></Nav.Link>
+              <Nav.Link className='px-0'><FaXTwitter size={30} /></Nav.Link>
+              <Nav.Link className='px-0'><FaInstagram size={30} /></Nav.Link>
             </Nav>
           </Col>
         </Row>
