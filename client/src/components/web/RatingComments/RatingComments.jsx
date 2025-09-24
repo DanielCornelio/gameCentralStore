@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, ProgressBar, Stack } from "react-bootstrap";
 import './RatingComments.scss'
+import { CommentModal } from "../CommentModal";
+
 
 export const RatingComments = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <Stack gap={3}>
       <Card className="bg-gray text-light p-3">
@@ -11,7 +14,7 @@ export const RatingComments = () => {
         <Stack>
           <Stack direction="horizontal" gap={2}>
             <span>5</span> 
-            <ProgressBar className="w-75" now={94} />
+            <ProgressBar className="w-75" now={10} />
             <span>94%</span>
           </Stack>
           <Stack direction="horizontal" gap={2} >
@@ -36,7 +39,9 @@ export const RatingComments = () => {
           </Stack>
         </Stack>
       </Card>
-      <Button size="lg">Agregar Comentario</Button>
+      <Button size="lg" onClick={() => setShowModal(true)}>Agregar Comentario</Button>
+      <CommentModal showModal={showModal} setShowModal={setShowModal} />
+
     </Stack>
   );
 };
