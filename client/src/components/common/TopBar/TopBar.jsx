@@ -23,6 +23,7 @@ export const TopBar = () => {
           >
             <Nav.Link as={NavLink} to="/">Inicio</Nav.Link>
             <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+            <Nav.Link as={NavLink} to="/game">Game</Nav.Link>
             <NavDropdown title="Perfil" id="navbarScrollingDropdown">
               <NavDropdown.Item as={Link}>Action</NavDropdown.Item>
               <NavDropdown.Item as={Link}>

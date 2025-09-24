@@ -10,6 +10,9 @@
     border: 1px solid $primary-hover;
     text-shadow: 2px 2px 2px $primary;
   }
+  &:active{
+    background-color: $primary-hover !important;
+  }
 }
 
 .btn-secondary {
@@ -21,6 +24,9 @@
     background-color: $secondary-hover;
     border: 1px solid $secondary-hover;
     text-shadow: 2px 2px 2px $secondary;
+  }
+  &:active{
+    background-color: $secondary-hover !important;
   }
 }
 
