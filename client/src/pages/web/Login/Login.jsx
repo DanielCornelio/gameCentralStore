@@ -25,14 +25,13 @@ export const Login = () => {
         <Form className="login-form">
           <Stack gap={4}>
             <FloatingLabel controlId="floatingInput" label="Ingresa tu email">
-              <Form.Control type="email" placeholder="name@example.com" autoComplete="email"/>
+              <Form.Control type="email" placeholder="" autoComplete="email"/>
             </FloatingLabel>
 
             <FloatingLabel controlId="floatingPassword" label="Ingresa tu contraseña" className="d-flex justify-content-end align-items-center">
               <Form.Control
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                autoComplete="new-password"
+                placeholder=""
               />
               <span
                 variant="btn-link"

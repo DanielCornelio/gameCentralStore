@@ -19,10 +19,6 @@ export const Register = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleTermsClick = (e) => {
-    e.preventDefault();
-    setShowModal(true);
-  };
 
   return (
     <Container className="register d-flex justify-content-center align-items-center">
@@ -32,15 +28,14 @@ export const Register = () => {
           <Stack gap={4}>
             {/* Email */}
             <FloatingLabel controlId="floatingInput" label="Ingresa tu email">
-              <Form.Control type="email" placeholder="name@example.com" autoComplete='email'/>
+              <Form.Control type="email" placeholder=""/>
             </FloatingLabel>
 
             {/* Password */}
             <FloatingLabel controlId="floatingPassword" label="Ingresa tu contraseña" className="d-flex justify-content-end align-items-center">
               <Form.Control
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                autoComplete="new-password" 
+                placeholder=""
               />
               <span
                 variant="btn-link"
@@ -55,8 +50,7 @@ export const Register = () => {
             <FloatingLabel controlId="floatingConfirmPassword" label="Confirma tu contraseña" className="d-flex justify-content-end align-items-center">
               <Form.Control
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Password"
-                autoComplete="new-password" 
+                placeholder=""
               />
               <span
                 variant="btn-link"
