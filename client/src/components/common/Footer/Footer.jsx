@@ -1,8 +1,6 @@
 import { Container, Row, Col, Stack, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaGooglePlay, FaApple, FaFacebook, FaXTwitter, FaInstagram } from 'react-icons/fa6';
-import MarketplaceCard from "../../web/MarketplaceCard/MarketplaceCard";
-
 
 import './Footer.css';
 
@@ -30,8 +28,20 @@ export const Footer = () => {
           <Col md={3} className="mb-3">
             <h5 className='mb-4'>Descarga nuestra app</h5>
             <Stack gap={3}>
-              <MarketplaceCard icono={FaGooglePlay} titulo="Get it now!" tienda="Google Play" />
-              <MarketplaceCard icono={FaApple} titulo="Get it now!" tienda="App Store" />
+              <div className="d-flex align-items-center border p-2 rounded bg-light text-dark">
+                <FaGooglePlay size={24} className="me-2" />
+                <div>
+                  <small>Get it now!</small>
+                  <h6 className="mb-0">Google Play</h6>
+                </div>
+              </div>
+              <div className="d-flex align-items-center border p-2 rounded bg-light text-dark">
+                <FaApple size={24} className="me-2" />
+                <div>
+                  <small>Get it now!</small>
+                  <h6 className="mb-0">App Store</h6>
+                </div>
+              </div>
             </Stack>
           </Col>
 
@@ -56,4 +66,5 @@ export const Footer = () => {
 };
 
 export default Footer;
+
 
