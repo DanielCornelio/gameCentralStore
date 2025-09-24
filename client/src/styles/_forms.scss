@@ -10,7 +10,7 @@ input[type="email"],
 input[type="password"],
 input[type="text"],
 textarea {
-  background-color: $background-grey !important;
+  background-color: $background-gray !important;
   border: 1px solid $secondary !important;
   color: $text-light !important;
   outline: none;
@@ -27,13 +27,13 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus,
 textarea:focus {
-  background-color: $background-grey !important;
+  background-color: $background-gray !important;
   border: 1px solid $secondary-hover !important;
   color: $text-light !important;
   outline: none;
 }
 .form-floating > label{
-  border: $background-grey !important;
+  border: $background-gray !important;
 }
 .show-password {
   position: absolute;
@@ -42,10 +42,10 @@ textarea:focus {
 }
 
 .check {
-  background-color: $background-grey;
+  background-color: $background-gray;
   border: 1px solid $secondary-hover;
   &:focus {
-    background-color: $background-grey;
+    background-color: $background-gray;
     border: 1px solid $secondary-hover;
   }
   &:checked {

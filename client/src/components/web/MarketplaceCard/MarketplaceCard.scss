@@ -1,5 +1,7 @@
+@use '../../../styles/colors' as *;
+
  .bg-marketplace-card{
-    background: var(--bs-carbon-dark);
+    background: $background-gray;
   }
   .bg-marketplace-card:hover{
     background-color: var(--bs-secondary-hover);
