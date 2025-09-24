@@ -1,14 +1,14 @@
-import { Container, Row, Col, Stack, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Stack, Card, Nav, Navbar } from 'react-bootstrap';
+import { FaFacebook, FaApple, FaInstagram, FaGooglePlay } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
+import { MarketplaceCard } from '../../../components/web/MarketplaceCard/MarketplaceCard';
 import { NavLink } from 'react-router-dom';
-import { FaGooglePlay, FaApple, FaFacebook, FaXTwitter, FaInstagram } from 'react-icons/fa6';
-import MarketplaceCard from "../../web/MarketplaceCard/MarketplaceCard";
+import './Footer.css'
 
-
-import './Footer.css';
 
 export const Footer = () => {
   return (
-    <footer className="footer-sticky bg-dark text-light mt-5">
+    <footer className="footer bg-dark-base text-light">
       <Container className="py-4">
         <Row>
           <Col md={3} className="mb-3">
@@ -20,7 +20,7 @@ export const Footer = () => {
 
           <Col md={3} className="mb-3">
             <h5 className='mb-3'>Enlaces útiles</h5>
-            <Nav className="flex-column">
+            <Nav  className="flex-column">
               <Nav.Link as={NavLink} to="/" end className='px-0'>Inicio</Nav.Link>
               <Nav.Link as={NavLink} to="/login" className='px-0'>Login</Nav.Link>
               <Nav.Link as={NavLink} to="/service" className='px-0'>Servicios</Nav.Link>
@@ -44,16 +44,13 @@ export const Footer = () => {
             </Nav>
           </Col>
         </Row>
-      </Container>
+      </Container >
 
       <div className="text-center py-3 border-top border-secondary">
         <Container>
-          <span>© {new Date().getFullYear()} Game Central Store. Todos los derechos reservados</span>
+          <span>© {new Date().getFullYear()} Game Center Store. Todos los derechos reservados</span>
         </Container>
       </div>
-    </footer>
+    </footer >
   );
 };
-
-export default Footer;
-
