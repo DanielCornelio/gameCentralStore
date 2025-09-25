@@ -1,7 +1,7 @@
 @use '../../../styles/colors' as *;
 
 .topbar {
-  background-color: #1a1a1a; 
+  background-color: $background-dark; 
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
   .navbar-brand {
@@ -17,7 +17,6 @@
   .nav-link {
     color: $text-light !important;
     font-weight: 500;
-  
 
     &.active {
       color: $secondary-hover !important;
@@ -25,7 +24,7 @@
     }
 
     &:hover {
-      color: $secondary-hover;
+      color: $secondary-hover !important;
       transition: color 0.3s ease;
     }
   }
