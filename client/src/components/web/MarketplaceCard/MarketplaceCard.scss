@@ -1,0 +1,13 @@
+@use '../../../styles/colors' as *;
+
+ .bg-marketplace-card{
+    background: $background-gray;
+    cursor: pointer;
+
+    &:hover{
+      background-color: $secondary-hover;
+      transition: ease-in .4s;
+
+    }
+  }
+ 

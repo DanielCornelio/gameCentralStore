@@ -1,8 +1,0 @@
- .bg-marketplace-card{
-    background: var(--bs-carbon-dark);
-  }
-  .bg-marketplace-card:hover{
-    background-color: var(--bs-secondary-hover);
-    cursor: pointer;
-    transition: ease-in .4s;
-  }

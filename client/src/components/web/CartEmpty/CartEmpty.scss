@@ -1,0 +1,15 @@
+@use '../../../styles/colors' as *;
+
+.cart-empty{
+
+
+    &-circle{
+        background: $background-gray;
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+   }
+}
