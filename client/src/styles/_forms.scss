@@ -1,0 +1,48 @@
+@use "./colors" as *;
+
+label,
+.show-password {
+  color: $text-gray !important;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  background-color: $background-grey;
+  border: 1px solid $secondary;
+  color: $text-light;
+  outline: none;
+}
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="text"]::placeholder {
+  color: $text-light;
+  outline: none;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  background-color: $background-grey;
+  border: 1px solid $secondary-hover;
+  color: $text-light;
+  outline: none;
+}
+.show-password {
+  position: absolute;
+  cursor: pointer;
+  padding-right: 12px;
+}
+
+.check {
+  background-color: $background-grey;
+  border: 1px solid $secondary-hover;
+  &:focus {
+    background-color: $background-grey;
+    border: 1px solid $secondary-hover;
+  }
+  &:checked {
+    background-color: $secondary-hover;
+    border: 1px solid $secondary-hover;
+  }
+}

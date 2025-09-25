@@ -1,0 +1,16 @@
+@use "./styles/colors" as *;
+@use "./styles/forms" as *;
+@use "./styles/buttons" as *;
+
+body{
+    background-color: $background-dark-web;
+    color: $text-light;
+}
+
+.bg-gray{
+    background-color: $background-grey;
+}
+
+.text-gray{
+    color: $text-gray;
+}

@@ -1,0 +1,10 @@
+@use '../../../styles/colors' as *;
+
+.modal-content{
+    background-color: $background-dark-web;
+    color: $text-light;
+}
+.resaltar{
+    font-weight: bold;
+    color: $secondary-hover;
+}

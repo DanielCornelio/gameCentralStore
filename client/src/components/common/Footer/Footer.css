@@ -1,0 +1,55 @@
+
+.footer-sticky {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+
+footer h5 {
+  color: var(--bs-light);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+
+footer p {
+  color: var(--bs-light);
+  margin: 0;
+}
+
+
+footer a {
+  color: var(--bs-secondary-hover);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+footer .nav {
+  gap: 1rem;
+}
+
+footer .nav-link {
+  color: var(--bs-light);
+  font-size: 1.2rem;
+  transition: color 0.25s ease;
+}
+
+footer .nav-link:hover {
+  color: var(--bs-secondary-hover);
+}
+
+
+footer .text-center {
+  border-top: 1px solid var(--bs-secondary);
+  padding-top: 1rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--bs-light);
+}

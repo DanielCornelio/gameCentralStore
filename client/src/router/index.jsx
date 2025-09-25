@@ -1,13 +1,34 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
+import { Home } from "../pages/web/Home";
+import { WebLayout } from "../layouts/web/WebLayout";
+import { Login, Register, GameDetail } from "../pages/web";
 
 const routes = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <WebLayout />,
+    children: [
+      {
         path: "/",
-        element: <App />
-    }
+        element: <Home />,
+      },
+      {
+        path: "/game",
+        element: <GameDetail />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
 ]);
-
-
 
 export default routes;

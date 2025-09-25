@@ -6,30 +6,16 @@ import kingdom from "../../assets/img/Kingdom-Come-Deliverance-2.webp";
 
 function Carrousel() {
   const images = [
-    { src: eldenring, label: "First slide", text: "Nulla vitae elit libero." },
-    {
-      src: gowr,
-      label: "Second slide",
-      text: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      src: wukong,
-      label: "Third slide",
-      text: "Praesent commodo cursus magna.",
-    },
-    {
-      src: kingdom,
-      label: "Fourth slide",
-      text: "Vel scelerisque nisl consectetur.",
-    },
+    { src: eldenring, label: "First slide" },
+    { src: gowr, label: "Second slide" },
+    { src: wukong, label: "Third slide" },
+    { src: kingdom, label: "Fourth slide" },
   ];
 
   return (
     <div
       style={{
-        width: "90%",
-        maxWidth: "850px",
-        margin: "20px auto",
+        width: "100%",
         aspectRatio: "16/9",
         overflow: "hidden",
       }}
@@ -46,10 +32,6 @@ function Carrousel() {
                 objectFit: "cover",
               }}
             />
-            <Carousel.Caption>
-              <h3>{img.label}</h3>
-              <p>{img.text}</p>
-            </Carousel.Caption>
           </Carousel.Item>
         ))}
       </Carousel>

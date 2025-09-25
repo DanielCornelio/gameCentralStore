@@ -1,0 +1,22 @@
+@use "../../../styles/colors" as *;
+
+.game-detail-card {
+  background-color: $background-grey;
+  color: $text-light;
+  font-size: 16px;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 350px;
+}
+.heart-outline {
+  color: $secondary-hover;
+  cursor: pointer;
+}
+.game-card-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
