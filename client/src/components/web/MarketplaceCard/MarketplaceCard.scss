@@ -2,9 +2,12 @@
 
  .bg-marketplace-card{
     background: $background-gray;
-  }
-  .bg-marketplace-card:hover{
-    background-color: var(--bs-secondary-hover);
     cursor: pointer;
-    transition: ease-in .4s;
+
+    &:hover{
+      background-color: $secondary-hover;
+      transition: ease-in .4s;
+
+    }
   }
+ 
