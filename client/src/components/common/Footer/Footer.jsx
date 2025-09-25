@@ -51,7 +51,7 @@ export const Footer = () => {
         </Row>
       </Container>
 
-      <div className="footer__bottom text-center py-3 border-top border-secondary">
+      <div className="footer__bottom text-center py-3 border-top ">
         <Container>
           <span>© {new Date().getFullYear()} Game Central Store. Todos los derechos reservados</span>
         </Container>
