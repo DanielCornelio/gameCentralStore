@@ -11,7 +11,10 @@
 
     .nav-link {
       color: $text-light;
+      &:focus{
+      color: $secondary-hover !important;
 
+      }
       &.active {
         color: $secondary-hover;
         font-weight: bold;
@@ -26,10 +29,18 @@
 
   &__social {
     a {
-      transition: color 0.3s;
+      color: $text-light;
       &:hover {
         color: $secondary-hover !important; 
       }
+      &.active{
+      color: $secondary-hover !important;
+      }
+      &:focus{
+      color: $secondary-hover !important;
+
+      }
+      
     }
   }
 
