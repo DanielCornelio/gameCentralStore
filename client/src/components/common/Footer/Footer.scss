@@ -1,7 +1,7 @@
 @use '../../../styles/colors' as *;
 
 .footer {
-  background-color: $background-dark;
+  background-color: $background-dark !important;
   &__links {
     
 
