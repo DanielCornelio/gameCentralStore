@@ -1,28 +1,31 @@
+@use '../../../styles/colors' as *;
+
 .topbar {
   background-color: #1a1a1a; 
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
   .navbar-brand {
-    color: var(--bs-light);
+    color: $text-light;
     font-weight: bold;
     font-size: 1.5rem;
 
     &:hover {
-      color: var(--bs-secondary-hover);
+      color: $secondary-hover;
     }
   }
 
   .nav-link {
-    color: var(--bs-light) !important;
+    color: $text-light !important;
     font-weight: 500;
+  
 
     &.active {
-      color: var(--bs-secondary-hover) !important;
-      font-weight: bold;
+      color: $secondary-hover !important;
+      // font-weight: bold;
     }
 
     &:hover {
-      color: var(--bs-secondary-hover);
+      color: $secondary-hover;
       transition: color 0.3s ease;
     }
   }
