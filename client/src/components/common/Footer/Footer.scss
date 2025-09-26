@@ -1,0 +1,52 @@
+@use '../../../styles/colors' as *;
+
+.footer {
+  background-color: $background-dark !important;
+  &__links {
+    
+
+    .nav {
+      color: $secondary-hover !important;
+    }
+
+    .nav-link {
+      color: $text-light;
+      &:focus{
+      color: $secondary-hover !important;
+
+      }
+      &.active {
+        color: $secondary-hover;
+        font-weight: bold;
+      }
+
+      &:hover {
+        color: $secondary-hover !important;
+        transition: color 0.25s ease;
+      }
+    }
+  }
+
+  &__social {
+    a {
+      color: $text-light;
+      &:hover {
+        color: $secondary-hover !important; 
+      }
+      &.active{
+      color: $secondary-hover !important;
+      }
+      &:focus{
+      color: $secondary-hover !important;
+
+      }
+      
+    }
+  }
+
+  &__bottom {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid $secondary !important; 
+  }
+}

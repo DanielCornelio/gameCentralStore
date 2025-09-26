@@ -7,15 +7,16 @@ import {
   FaXTwitter,
   FaInstagram,
 } from "react-icons/fa6";
-import { MarketplaceCard } from "../../web/MarketplaceCard/MarketplaceCard";
-
-import "./Footer.css";
+import { MarketplaceCard } from "../../../components/web/MarketplaceCard/MarketplaceCard";
+import React from "react";
+import "./Footer.scss";
 
 export const Footer = () => {
   return (
-    <footer className="footer bg-dark text-light mt-5">
+    <footer className="footer bg-dark-base text-light">
       <Container className="py-4">
         <Row>
+          {/* Logo y descripción */}
           <Col md={3} className="mb-3">
             <Stack gap={2}>
               <h5>Game Central Store</h5>
@@ -23,9 +24,10 @@ export const Footer = () => {
             </Stack>
           </Col>
 
+          {/* Enlaces útiles */}
           <Col md={3} className="mb-3">
             <h5 className="mb-3">Enlaces útiles</h5>
-            <Nav className="flex-column">
+            <Nav className="flex-column footer__links">
               <Nav.Link as={NavLink} to="/" end className="px-0">
                 Inicio
               </Nav.Link>
@@ -38,6 +40,7 @@ export const Footer = () => {
             </Nav>
           </Col>
 
+          {/* Descarga de app */}
           <Col md={3} className="mb-3">
             <h5 className="mb-4">Descarga nuestra app</h5>
             <Stack gap={3}>
@@ -54,9 +57,10 @@ export const Footer = () => {
             </Stack>
           </Col>
 
+          {/* Redes sociales */}
           <Col md={3} className="mb-3">
             <h5 className="mb-4">Síguenos</h5>
-            <Nav className="d-flex gap-3">
+            <Nav className="d-flex gap-3 footer__social">
               <Nav.Link className="px-0">
                 <FaFacebook size={30} />
               </Nav.Link>
@@ -71,7 +75,7 @@ export const Footer = () => {
         </Row>
       </Container>
 
-      <div className="text-center py-3 border-top border-secondary">
+      <div className="footer__bottom text-center py-3 border-top ">
         <Container>
           <span>
             © {new Date().getFullYear()} Game Central Store. Todos los derechos
@@ -82,5 +86,3 @@ export const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Col, Container, Row, Stack } from "react-bootstrap";
-import { GameDetailCard, SectionTitle, RatingComments } from "../../../components";
+import { GameDetailCard, SectionTitle, RatingComments, CommentModal } from "../../../components";
 import { CommentCard } from "../../../components/web/CommentCard/CommentCard";
 
 export const GameDetail = () => {
+  
   return (
     <Container>
       <GameDetailCard />

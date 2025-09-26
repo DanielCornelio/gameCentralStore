@@ -1,6 +1,6 @@
 import React from 'react'
 import { Stack } from 'react-bootstrap'
-import './MarketplaceCard.css'
+import './MarketplaceCard.scss'
 
 export const MarketplaceCard = ({icono:Icono, titulo, tienda}) => {
     return (

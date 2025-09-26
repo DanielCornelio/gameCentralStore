@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "../pages/web/Home";
 import { WebLayout } from "../layouts/web/WebLayout";
-import { Login, Register, GameDetail } from "../pages/web";
+import { Login, Register, GameDetail, Cart } from "../pages/web";
 
 const routes = createBrowserRouter([
   {
@@ -15,6 +15,10 @@ const routes = createBrowserRouter([
       {
         path: "/game",
         element: <GameDetail />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
