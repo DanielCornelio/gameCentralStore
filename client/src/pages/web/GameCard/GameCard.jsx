@@ -17,4 +17,3 @@ export const GameCard = ({ game, onGameClick }) => {
     </div>
   );
 };
-EOF
