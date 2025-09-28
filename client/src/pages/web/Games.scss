@@ -1,0 +1,28 @@
+.games-page {
+  padding: 2rem 0;
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .search-and-filters {
+    margin-bottom: 2rem;
+  }
+
+  .games-grid {
+    .game-card {
+      height: 100%;
+    }
+  }
+
+  .no-games-message {
+    text-align: center;
+    font-size: 1.125rem;
+    color: #718096;
+    padding: 3rem 0;
+  }
+}
