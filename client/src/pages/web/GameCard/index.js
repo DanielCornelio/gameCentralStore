@@ -1,0 +1,1 @@
+echo "export { GameCard } from './GameCard';" > src/components/web/GameCard/index.js
