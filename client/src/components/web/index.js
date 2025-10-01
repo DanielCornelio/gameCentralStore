@@ -8,3 +8,4 @@ export { LastGameCard } from './LastGameCard';
 export { PremierGameCard } from './PremiereGameCard';
 export { RatingComments } from './RatingComments';
 export { TermsModal } from './TermsModal';
+export { CartCard } from './CartCard';
