@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss'
@@ -6,11 +6,13 @@ import { RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import router from './router/index.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
+import CartProvider from './contexts/CartContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router}/>
+      <CartProvider>
+        <RouterProvider router={router}/>
       <Toaster
         position="top-right"
         toastOptions={{
@@ -28,6 +30,7 @@ createRoot(document.getElementById('root')).render(
           },
         }}
       />
+      </CartProvider>
     </AuthProvider>
   </StrictMode>,
 )

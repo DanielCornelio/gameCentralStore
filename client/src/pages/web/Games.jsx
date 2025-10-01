@@ -4,6 +4,7 @@ import { gamesData, genres, platforms } from '../../data/games';
 import { useGameFilters } from '../../hooks/useGameFilters';
 import { SearchAndFilters, GameCard } from '../../components/web';
 import './Games.scss';
+import { SectionTitle } from '../../components';
 
 export const Games = () => {
   const {
@@ -18,7 +19,7 @@ export const Games = () => {
 
   return (
     <Container className="games-page">
-      <h1 className="page-title">Catálogo de Juegos</h1>
+      <SectionTitle title="Store" />
       <SearchAndFilters
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

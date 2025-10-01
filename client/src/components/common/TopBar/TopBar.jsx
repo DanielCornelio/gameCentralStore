@@ -30,33 +30,23 @@ export const TopBar = ({ cartCount = 0 }) => {
             <Nav.Link as={NavLink} to="/" end>Inicio</Nav.Link>
             <Nav.Link as={NavLink} to="/offers">Ofertas</Nav.Link>
             <Nav.Link as={NavLink} to="/games">Juegos</Nav.Link>
-            
-            {isAuthenticated && (
-              <NavDropdown 
-                title={<><FaUser /> Hola, {user?.name}</>} 
-                id="navbarScrollingDropdown"
-              >
-                <NavDropdown.Item as={NavLink} to="/profile">Mi perfil</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/settings">Configuración</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>Cerrar sesión</NavDropdown.Item>
-              </NavDropdown>
-            )}
+
+
           </Nav>
 
-          <Form className="d-flex me-3" onSubmit={handleSearch}>
-            <FormControl
-              type="search"
-              placeholder="Buscar juegos..."
-              className="me-2"
-              aria-label="Buscar"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <Button type="submit" variant="outline-light">Buscar</Button>
-          </Form>
 
-          <Nav className="d-flex align-items-center gap-2">
+          {isAuthenticated && (
+            <NavDropdown
+              title={<><FaUser /> Hola, {user?.name}</>}
+              id="navbarScrollingDropdown"
+            >
+              <NavDropdown.Item as={NavLink} to="/profile">Mi perfil</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/settings">Configuración</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={handleLogout}>Cerrar sesión</NavDropdown.Item>
+            </NavDropdown>
+          )}
+
             <Nav.Link as={NavLink} to="/cart" className="position-relative">
               <FaShoppingCart size={20} />
               {cartCount > 0 && (
@@ -64,22 +54,24 @@ export const TopBar = ({ cartCount = 0 }) => {
               )}
             </Nav.Link>
 
+          <Nav className="d-flex align-items-center gap-2 ms-4">
+
             {!isAuthenticated && (
               <>
-                <Button 
-                  as={Link} 
-                  to="/login" 
-                  variant="outline-light" 
+                <Button
+                  as={Link}
+                  to="/login"
+                  variant="outline-light"
                   size="sm"
                   className="ms-2"
                 >
                   <FaSignInAlt className="me-1" />
                   Iniciar Sesión
                 </Button>
-                <Button 
-                  as={Link} 
-                  to="/register" 
-                  variant="primary" 
+                <Button
+                  as={Link}
+                  to="/register"
+                  variant="primary"
                   size="sm"
                 >
                   Registrarse
