@@ -6,7 +6,7 @@ import { FaWindows } from "react-icons/fa";
 import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 
 
-export const GameDetailCard = () => {
+export const GameDetailCard = (info) => {
   const [like, setLike] = useState(false);
 
   const handleLike = () => {
@@ -20,7 +20,7 @@ export const GameDetailCard = () => {
           <Row>
             <Col md={3}>
               <Image
-                src="./src/assets/img/resident-evi-0.jpg"
+                src={info.image}
                 className="w-100"
                 rounded
               />
@@ -28,7 +28,7 @@ export const GameDetailCard = () => {
             <Col>
               <Stack gap={3}>
                 <Stack direction="horizontal" className="justify-content-between align-content-center">
-                  <h3 className="m-0">Resident Evil 0</h3>
+                  <h3 className="m-0">{info.title}</h3>
                   <i onClick={handleLike}>{like ? <IoHeartSharp size={30} className="heart-outline" /> : <IoHeartOutline size={30} className="heart-outline" />}</i>
                 </Stack>
                 <Stack direction="vertical">
@@ -36,12 +36,12 @@ export const GameDetailCard = () => {
                     Género:
                   </p>
                   <div>
-                    <Chip title="Terror" />
+                    <Chip title={info.genre} />
                   </div>
                 </Stack>
                 <Stack direction="vertical">
                   <p className="fw-bold">Fecha de lanzamiento:</p>
-                  <p>01/01/1970</p>
+                  <p>{info.release}</p>
                 </Stack>
                 <p>
                   Resident Evil 0 revela el misterio que se oculta tras el incidente
