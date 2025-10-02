@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { gamesData, genres, platforms } from '../../data/games';
-import { useGameFilters } from '../../hooks/useGameFilters';
-import { SearchAndFilters, GameCard } from '../../components/web';
+import { gamesData, genres, platforms } from '../../../data/games';
+import { useGameFilters } from '../../../hooks/useGameFilters';
+import { SearchAndFilters, GameCard } from '../../../components/web';
 import './Games.scss';
-import { SectionTitle } from '../../components';
+import { SectionTitle } from '../../../components';
 
 export const Games = () => {
   const {
