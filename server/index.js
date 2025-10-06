@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import usuariosRoutes from './src/routes/usuarios.route.js'
 import juegosRoutes from './src/routes/juegos.route.js'
+import favoritosRoutes from './src/routes/favoritos.route.js'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,9 +18,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', usuariosRoutes);
 app.use('/api', juegosRoutes);
-
-
-
+app.use('/api', favoritosRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

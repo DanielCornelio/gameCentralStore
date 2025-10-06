@@ -2,7 +2,7 @@
 CREATE DATABASE game_store
 
 \c game_store
--- agregar rol
+
 -- Tabla de usuarios
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
@@ -10,7 +10,7 @@ CREATE TABLE usuarios (
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    rol:[admin , usuario]
+    rol  NOT NULL CHECK (rol IN ('admin', 'usuario')) DEFAULT 'usuario',
     ultimo_login TIMESTAMP,
     activo BOOLEAN DEFAULT TRUE
 );
@@ -40,7 +40,6 @@ CREATE TABLE metodos_pago (
 );
 
 -- Tabla de juegos
--- AGregar stock
 CREATE TABLE juegos (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(200) NOT NULL,
@@ -51,6 +50,7 @@ CREATE TABLE juegos (
     fecha_lanzamiento DATE,
     portada_url VARCHAR(255),
     genero VARCHAR(50),
+    stock INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
     plataforma VARCHAR(50),
     edad_minima INTEGER,
     fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

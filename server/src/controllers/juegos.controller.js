@@ -55,7 +55,7 @@ export const deleteGame = async (req, res) => {
         const juegoEliminado = await deleteGameModel(id);
         if(juegoEliminado === 0) {
             res.status(404).json({message: 'Juego no encontrado'});
-            return
+            return;
         }
         res.status(200).json({message: 'Juego eliminado correctamente'});
         
