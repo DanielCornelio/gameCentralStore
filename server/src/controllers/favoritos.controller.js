@@ -1,8 +1,9 @@
-import { createFavoriteModel, deleteFavoriteModel, getFavoritesModel } from "../models/favoritos.model.js";
+import { createFavoriteModel, deleteFavoriteModel, getFavoritesByEmailModel } from "../models/favoritos.model.js";
 
-export const getFavorites = async (req, res) => {
+export const getFavoritesByEmail = async (req, res) => {
     try {
-        const favoritos = await getFavoritesModel();
+        const {email} = req.user
+        const favoritos = await getFavoritesByEmailModel();
         res.status(200).json({results:favoritos});
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });

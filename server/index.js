@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 
 import usuariosRoutes from './src/routes/usuarios.route.js'
+import authRoutes from './src/routes/auth.route.js'
 import juegosRoutes from './src/routes/juegos.route.js'
 import favoritosRoutes from './src/routes/favoritos.route.js'
 
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', usuariosRoutes);
+app.use('/api', authRoutes);
 app.use('/api', juegosRoutes);
 app.use('/api', favoritosRoutes);
 
