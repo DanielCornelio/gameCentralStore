@@ -6,7 +6,6 @@ CREATE DATABASE game_store
 -- Tabla de usuarios
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -19,7 +18,9 @@ CREATE TABLE usuarios (
 CREATE TABLE perfiles (
     id SERIAL PRIMARY KEY,
     usuario_id INTEGER UNIQUE NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    nombre_completo VARCHAR(100),
+    username VARCHAR(50) UNIQUE NOT NULL,
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
     fecha_nacimiento DATE,
     pais VARCHAR(50),
     avatar_url VARCHAR(255)

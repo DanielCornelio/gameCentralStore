@@ -20,7 +20,7 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: "No autorizado" });
     }
 
-    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ email, rol:user.rol }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 

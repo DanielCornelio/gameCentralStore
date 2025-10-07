@@ -20,7 +20,7 @@ export const getUserByEmail = async (req, res) => {
     }
 }
 
-export const createUser = async (req, res) =>{
+export const register = async (req, res) =>{
     try {
         const {username, email, password_hash} = req.body;
         if(!username || !email || !password_hash){
