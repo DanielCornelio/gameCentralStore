@@ -26,9 +26,11 @@ export const verifyToken = async (req, res, next) =>{
     }
 }
 
+
+
 export const verifyCredentials = (req, res, next) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { email, password_hash } = req.body;
+    if (!email || !password_hash) {
         return res.status(400).json({ message: 'El email y la contraseña son requeridos' });
     }
     next();
