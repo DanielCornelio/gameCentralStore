@@ -9,7 +9,7 @@ CREATE TABLE usuarios (
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    rol  NOT NULL CHECK (rol IN ('admin', 'usuario')) DEFAULT 'usuario',
+    rol VARCHAR(20) NOT NULL CHECK (rol IN ('admin', 'usuario')) DEFAULT 'usuario',
     ultimo_login TIMESTAMP,
     activo BOOLEAN DEFAULT TRUE
 );
