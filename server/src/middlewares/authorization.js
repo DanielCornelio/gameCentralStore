@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config.js';
+import { getUserByEmailModel } from '../models/usuarios.model.js';
 
 export const verifyToken = async (req, res, next) =>{
     try {
@@ -11,6 +12,12 @@ export const verifyToken = async (req, res, next) =>{
         const token = authHeader.split(" ")[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         const {email, rol} = decoded;
+
+        const user = await getUserByEmailModel(email);
+        if(!user){
+            return res.status(403).json({message: 'Usuario no autorizado'});
+        }
+
         req.user = {email, rol};
         next();
 

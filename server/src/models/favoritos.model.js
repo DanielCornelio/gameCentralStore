@@ -4,11 +4,19 @@ export const getFavoritesByEmailModel = async (email) => {
     const querySQL = {
         text: `
     SELECT 
-        f.juego_id
+        f.juego_id,
+        j.titulo,
+        j.genero,
+        j.precio,
+        j.portada_url,
+        j.plataforma,
+        f.usuario_id
 	FROM 
         favoritos f
 	LEFT JOIN 
         usuarios u ON u.id = f.usuario_id
+    LEFT JOIN 
+        juegos j ON j.id = f.juego_id
 	WHERE 
         u.email = $1;`,
         values: [email]
@@ -26,10 +34,10 @@ export const createFavoriteModel = async ({ usuario_id, juego_id }) => {
     return nuevoFavorito;
 }
 
-export const deleteFavoriteModel = async (id) => {
+export const deleteFavoriteModel = async ({usuario_id, juego_id}) => {
     const querySQL = {
-        text: 'DELETE FROM favoritos WHERE id=$1',
-        values: [id]
+        text: 'DELETE FROM favoritos WHERE usuario_id=$1 AND juego_id=$2',
+        values: [usuario_id, juego_id]
     };
     const result = await pool.query(querySQL);
     return result.rowCount;
