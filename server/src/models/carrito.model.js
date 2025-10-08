@@ -10,8 +10,9 @@ export const getCartByEmailModel = async (email) => {
         j.precio,
         j.portada_url,
         j.plataforma,
-        c.fecha_creacion,
+        c.fecha_agregado,
         c.cantidad,
+        c.usuario_id
     FROM 
         carrito c
     LEFT JOIN 
@@ -22,8 +23,8 @@ export const getCartByEmailModel = async (email) => {
         u.email = $1;`,
         values: [email]
     }
-    const { rows: favorito } = await pool.query(querySQL);
-    return favorito;
+    const { rows: carrito } = await pool.query(querySQL);
+    return carrito;
 }
 
 export const createCartModel = async ({usuario_id, juego_id, cantidad}) => {
@@ -34,4 +35,13 @@ export const createCartModel = async ({usuario_id, juego_id, cantidad}) => {
     const {rows: carrito } = await pool.query(querySQL);
     return carrito;
 
+}
+
+export const clearCartByUserIdModel = async (usuario_id) =>{
+    const querySQL = {
+        text: 'DELETE FROM carrito WHERE usuario_id = $1',
+        values: [usuario_id]
+    }
+    const result = await pool.query(querySQL);
+    return result.rowCount;
 }

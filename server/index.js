@@ -6,6 +6,8 @@ import usuariosRoutes from './src/routes/usuarios.route.js'
 import authRoutes from './src/routes/auth.route.js'
 import juegosRoutes from './src/routes/juegos.route.js'
 import favoritosRoutes from './src/routes/favoritos.route.js'
+import carritoRoutes from './src/routes/carrito.route.js'
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +23,8 @@ app.use('/api', usuariosRoutes);
 app.use('/api', authRoutes);
 app.use('/api', juegosRoutes);
 app.use('/api', favoritosRoutes);
+app.use('/api', carritoRoutes);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
