@@ -1,0 +1,1 @@
+INSERT INTO usuarios (email, hash_password, fecha_creacion, rol,  activo) VALUES (daniel@test.com,)
