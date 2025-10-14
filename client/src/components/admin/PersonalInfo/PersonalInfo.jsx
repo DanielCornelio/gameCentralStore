@@ -34,7 +34,7 @@ export const PersonalInfo = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center">
+    <Container className="d-flex justify-content-center align-items-center mb-4">
       <Col sm={12} md={10} lg={8}>
         <Row className="g-4">
           <Col sm={12} md={4} className="d-flex flex-column align-items-center">

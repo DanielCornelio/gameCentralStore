@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Row, Col, Badge, Stack } from "react-bootstrap";
 
-export const ProductModal = () => {
+export const ProductModal = ({ onSave, onUpdate, productEdit }) => {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
+    id: null,
     titulo: "",
     imagen: null,
     descripcion: "",
@@ -14,9 +15,17 @@ export const ProductModal = () => {
     precio: "",
   });
 
+  useEffect(() => {
+    if (productEdit) {
+      setFormData(productEdit);
+      setShow(true);
+    }
+  }, [productEdit]);
+
   const handleClose = () => {
     setShow(false);
     setFormData({
+      id: null,
       titulo: "",
       imagen: null,
       descripcion: "",
@@ -27,8 +36,6 @@ export const ProductModal = () => {
       precio: "",
     });
   };
-
-  const handleShow = () => setShow(true);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,20 +57,28 @@ export const ProductModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos del producto:", formData);
-    // Aquí iría la lógica para enviar a la API
+    if (formData.id) {
+      onUpdate(formData);
+    } else {
+      onSave(formData);
+    }
     handleClose();
   };
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Nuevo producto
-      </Button>
+      {!productEdit && (
+        <Button variant="primary" onClick={() => setShow(true)}>
+          Agregar producto
+        </Button>
+      )}
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Agregar Nuevo Producto</Modal.Title>
+          <Modal.Title>
+            {" "}
+            {formData.id ? "Editar producto" : "Registrar producto"}
+          </Modal.Title>
         </Modal.Header>
 
         <Form onSubmit={handleSubmit}>
@@ -163,6 +178,7 @@ export const ProductModal = () => {
                     <option value="Estrategia">Estrategia</option>
                     <option value="Deportes">Deportes</option>
                     <option value="Shooter">Shooter</option>
+                    <option value="Shooter">Horror</option>
                   </Form.Select>
                 </Form.Group>
               </div>
@@ -184,7 +200,7 @@ export const ProductModal = () => {
               Cancelar
             </Button>
             <Button variant="primary" type="submit">
-              Enviar
+              {formData.id ? "Actualizar" : "Guardar"}
             </Button>
           </Modal.Footer>
         </Form>
