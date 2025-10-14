@@ -17,6 +17,8 @@ export const getUserByEmailModel = async (email) => {
     return usuario[0];
 }
 
+
+
 export const createUserModel = async (email, password_hash) => {
     const hashedPassword = bcrypt.hashSync(password_hash, 10);
     const querySQL = {

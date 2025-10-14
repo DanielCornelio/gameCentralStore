@@ -7,6 +7,7 @@ import authRoutes from './src/routes/auth.route.js'
 import juegosRoutes from './src/routes/juegos.route.js'
 import favoritosRoutes from './src/routes/favoritos.route.js'
 import carritoRoutes from './src/routes/carrito.route.js'
+import perfilRoutes from './src/routes/perfil.route.js'
 
 
 const app = express();
@@ -20,10 +21,11 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', usuariosRoutes);
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api', juegosRoutes);
 app.use('/api', favoritosRoutes);
 app.use('/api', carritoRoutes);
+app.use('/api', perfilRoutes);
 
 
 app.listen(PORT, () => {
