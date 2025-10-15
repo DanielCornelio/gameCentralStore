@@ -12,7 +12,7 @@ import { verifyAdmin } from "../middlewares/verifyAdmin.js";
 const router = Router();
 
 router.get("/usuarios", verifyToken, verifyAdmin, getAllUsers);
-router.get("/usuarios", verifyToken, getUserByEmail);
+router.get("/usuarios/me", verifyToken, getUserByEmail);
 router.post("/usuarios", register);
 router.put("/usuarios/:id", verifyToken, updateUser);
 router.delete("/usuarios/:id", verifyToken, verifyAdmin, deleteUser);

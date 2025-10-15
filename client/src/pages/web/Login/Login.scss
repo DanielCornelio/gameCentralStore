@@ -1,6 +1,14 @@
 @use '../../../index.scss' as *;
+@use '../../../styles/colors.scss' as *;
 
 .login{
     height: 100vh;
 }
 
+.text-error{
+    color: $error;
+    display: block;
+    margin-top:5px;
+    font-size: small;
+
+}

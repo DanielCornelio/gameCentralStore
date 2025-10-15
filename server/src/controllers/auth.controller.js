@@ -7,7 +7,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password_hash } = req.body;
     const user = await getUserByEmailModel(email);
-    
+    user[0]
     if (!user) {
       return res
         .status(404)
@@ -23,11 +23,10 @@ export const loginUser = async (req, res) => {
     const token = jwt.sign({ email, rol:user.rol }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
+    
+    delete user.password_hash;
 
-    return res.status(200).json({ token, user:{
-      email: user.email,
-      rol: user.rol
-    } });
+    return res.status(200).json({ token, user});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

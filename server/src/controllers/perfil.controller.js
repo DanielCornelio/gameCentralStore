@@ -4,6 +4,7 @@ import { getMeModel } from "../models/perfil.model.js";
 export const getMe = async (req, res) => {
     try {
         const { email } = req.user;
+        console.log(email)
         const perfil = await getMeModel(email);
         res.status(200).json({result:perfil})
     } catch (error) {

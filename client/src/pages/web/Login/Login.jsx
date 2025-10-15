@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.scss";
 import {
   Col,
@@ -27,7 +27,7 @@ const loginSchema = Yup.object().shape({
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, loading } = useAuth();
+  const { login, loading,  } = useAuth();
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {

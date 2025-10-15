@@ -4,6 +4,6 @@ import { getMe } from "../controllers/perfil.controller.js";
 
 const router = Router()
 
-router.get('/usuarios/me', verifyToken, getMe);
+router.get('/me', verifyToken, getMe);
 
 export default router;
