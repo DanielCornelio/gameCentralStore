@@ -4,3 +4,5 @@ export * from './GameDetail'
 export * from './Cart'
 export * from './Profile'
 export * from './Games'
+export * from './Favorites'
+

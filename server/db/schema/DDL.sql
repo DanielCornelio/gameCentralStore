@@ -11,19 +11,14 @@ CREATE TABLE usuarios (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     rol  NOT NULL CHECK (rol IN ('admin', 'usuario')) DEFAULT 'usuario',
     activo BOOLEAN DEFAULT TRUE
-);
-
--- Tabla de perfiles de usuario
-CREATE TABLE perfiles (
-    id SERIAL PRIMARY KEY,
-    usuario_id INTEGER UNIQUE NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    username VARCHAR(50) UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE,
     nombre VARCHAR(100),
     apellido VARCHAR(100),
     fecha_nacimiento DATE,
     pais VARCHAR(50),
     avatar_url VARCHAR(255)
 );
+
 
 -- Tabla de métodos de pago simplificada
 CREATE TABLE metodos_pago (

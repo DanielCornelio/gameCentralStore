@@ -11,10 +11,13 @@ export const getAllUsers = async (req, res) =>{
 
 export const getUserByEmail = async (req, res) => {
     try {
-        const user = await getUserByEmailModel(req.user);
+        const {email} = req.user
+        const user = await getUserByEmailModel(email);
         if(!user){
             return res.status(404).json({message: 'Usuario no encontrado'});
         }
+        delete user.password_hash;
+        res.status(200).json({results:user})
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }

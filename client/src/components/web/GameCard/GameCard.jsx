@@ -5,27 +5,31 @@ import { Button, Stack } from 'react-bootstrap';
 import { CartContext } from '../../../contexts/CartContext';
 
 
-export const GameCard = ({ game} ) => {
-  const {id, image, title, genre, platform, price} = game;
+export const GameCard = ( {id, portada_url, titulo, genero, plataforma, precio} ) => {
+  // const {id, portada_url, titulo, genero, plataforma, precio} = game;
    const navigate = useNavigate();
-  const goToGame = () => navigate(`/games/${game.id}`)
+  const goToGame = () => navigate(`/games/${id}`)
 
   const { addToCart, cart } = useContext(CartContext);
-  const gameAdded = { id, image, title, genre, platform, price}
+  const gameAdded = { id, portada_url, titulo, genero, plataforma, precio}
   
+  const handleAddToCart = () => {
+    
+  }
+
   return (
     <div className="game-card" >
       <div className="game-image">
-        <img src={image || '/placeholder-game.jpg'} alt={title} />
+        <img src={portada_url || '/placeholder-game.jpg'} alt={titulo} />
       </div>
       <div className="game-info">
-        <h3 className="game-title">{title}</h3>
-        <p className="game-genre">{genre}</p>
-        <p className="game-platform">{platform}</p>
-        <div className="game-price">${price}</div>
+        <h3 className="game-title">{titulo}</h3>
+        <p className="game-genre">{genero}</p>
+        <p className="game-platform">{plataforma}</p>
+        <div className="game-price">${precio}</div>
       </div>
       <Stack direction='horizontal' className='p-3 justify-content-between'>
-        <Button variant="secondary"onClick={() => goToGame(game)}>Ver más</Button>
+        <Button variant="secondary"onClick={() => goToGame(id)}>Ver más</Button>
         <Button onClick={()=>{addToCart(gameAdded)}}>Agregar al carrito</Button>
       </Stack>
     </div>
