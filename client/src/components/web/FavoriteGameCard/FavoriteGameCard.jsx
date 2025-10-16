@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './GameCard.scss';
+import './FavoriteGameCard.scss';
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Image, Stack } from 'react-bootstrap';
 import { CartContext } from '../../../contexts/CartContext';
@@ -10,7 +10,7 @@ import { UserContext } from '../../../contexts/UserContext';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-export const GameCard = ({ id, portada_url, titulo, genero, plataforma, precio }) => {
+export const FavoriteGameCard = ({ id, usuario_id, juego_id, portada_url, titulo, genero, plataforma, precio }) => {
   // const {id, portada_url, titulo, genero, plataforma, precio} = game;
   const navigate = useNavigate();
   const goToGame = () => navigate(`/games/${id}`)
@@ -19,7 +19,7 @@ export const GameCard = ({ id, portada_url, titulo, genero, plataforma, precio }
   const gameAdded = { id, portada_url, titulo, genero, plataforma, precio }
 
  const [isLiked, setIsLiked] = useState(false);
-  const { addFavorite, removeFavorites, listFavorites} = useContext(FavoriteContext);
+  const { addFavorite, removeFavorites, listFavorites, setListFavorites} = useContext(FavoriteContext);
   const { user, token } = useContext(UserContext);
 
 
@@ -41,13 +41,14 @@ const handleLike = async () => {
 
     const data = {
       usuario_id: user.id,
-      juego_id: id
+      juego_id: juego_id
     };
     console.log(data)
     try {
       if (isLiked) {
         // Remover de favoritos
         const response = await removeFavorites(data);
+        setListFavorites(listFavorites)
         if (!response.error) {
           setIsLiked(false);
           toast.success("El juego se ha eliminado de tus favoritos")

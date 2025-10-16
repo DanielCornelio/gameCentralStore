@@ -1,29 +1,54 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
-import favoritesService from '../../../api/favorites';
+import { Container, Stack, Alert, Button } from 'react-bootstrap'
 import { UserContext } from '../../../contexts/UserContext';
+import { GameCard, SectionTitle } from '../../../components';
+import { FavoriteContext } from '../../../contexts/FavoriteContext';
+import { FavoriteGameCard } from '../../../components/web/FavoriteGameCard';
 
 export const Favorites = () => {
-    const [favorites, setFavorites] = useState([]);
-    const {user, token} = useContext(UserContext)
+    const { listFavorites, getFavorites } = useContext(FavoriteContext);
+    const { user, token } = useContext(UserContext);
+const [refreshKey, setRefreshKey] = useState(0); // Key para forzar rerender
 
-
-    const getFavorites = async () => {
-        try {
-            const data = await favoritesService.getFavoritesByEmail(token);
-            setFavorites(data);
-        } catch (error) {
-            toast.error("Error al cargar los juegos", error)
+    // Recargar favoritos cuando el componente se monte o cuando refreshKey cambie
+    useEffect(() => {
+        if (user && token) {
+            getFavorites();
         }
+    }, [user, token, refreshKey]);
+
+    const handleRefresh = () => {
+        setRefreshKey(prev => prev + 1); // Forzar recarga
+    };
+
+    if (!user) {
+        return (
+            <Container>
+                <Alert variant="warning">
+                    Debes iniciar sesión para ver tus favoritos.
+                </Alert>
+            </Container>
+        );
     }
 
-    useEffect(() => {
-        getFavorites();
-    }, [])
-    
     return (
         <Container>
-            Favorites
+            <SectionTitle title='Tus Juegos Favoritos'/>
+
+            {listFavorites.length === 0 ? (
+                <Alert variant="info">
+                    No tienes juegos favoritos aún.
+                </Alert>
+            ) : (
+                <Stack direction='horizontal' gap={4} className="flex-wrap">
+                    {listFavorites.map(favorito => (
+                        <FavoriteGameCard 
+                            key={favorito.id} 
+                            {...favorito} 
+                        />
+                    ))}
+                </Stack>
+            )}
         </Container>
-    )
+    );
 }

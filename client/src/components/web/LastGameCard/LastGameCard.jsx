@@ -1,50 +1,66 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Button, Card, Col, Image, Row, Stack } from "react-bootstrap";
 import "./LastGameCard.scss";
 import { Chip } from "../Chip/Chip";
-import { FaWindows } from "react-icons/fa";
 import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { FavoriteContext } from "../../../contexts/FavoriteContext";
-import favoritesService from "../../../api/favorites";
 import { UserContext } from "../../../contexts/UserContext";
-
+import toast, { Toaster } from "react-hot-toast";
 
 export const LastGameCard = ({ id, portada_url, titulo, genero, descripcion, plataforma, precio }) => {
-  const [like, setLike] = useState(false);
-  const {addFavorite} = useContext(FavoriteContext)
-  const {user} = useContext(UserContext);
+  const [isLiked, setIsLiked] = useState(false);
+  const { addFavorite, removeFavorites, listFavorites} = useContext(FavoriteContext);
+  const { user, token } = useContext(UserContext);
 
-  const data = {
-    usuario_id: user?.id,
-    juego_id: id
-  }
 
-  console.log("data ", data)
-  
+  // Verificar si el juego está en favoritos al cargar el componente
+  useEffect(() => {
+    if (user && listFavorites) {
+      const isGameLiked = listFavorites.some(fav => 
+        fav.juego_id === id || fav.id === id
+      );
+      setIsLiked(isGameLiked);
+    }
+  }, [listFavorites, user, id]);
+
   const handleLike = async () => {
-    const newLikeState = !like;
+    if (!user || !token) {
+      toast.error('Debes iniciar sesión para gestionar favoritos');
+      return;
+    }
+
+    const data = {
+      usuario_id: user.id,
+      juego_id: id
+    };
+    console.log(data)
     try {
-      if(newLikeState){
-        const response = await favoritesService.addToFavorite(data)
-        setLike(true);
-        console.log("Juego agregado a favoritos:", response.data);
+      if (isLiked) {
+        // Remover de favoritos
+        const response = await removeFavorites(data);
+        if (!response.error) {
+          setIsLiked(false);
+          toast.success("El juego se ha eliminado de tus favoritos")
+        }
+      } else {
+        // Agregar a favoritos
+        const response = await addFavorite(data);
+        if (!response.error) {
+          setIsLiked(true);
+          toast.success("El juego se ha agregado a tus favoritos")
+
+        }
       }
     } catch (error) {
-      console.error("Error al manejar favoritos:", error);
-        
-        // 💡 Manejo de errores: Si el error es 401 (No autorizado),
-        // quizás quieras redirigir al usuario al login.
-        if (error?.response && error?.response.status === 401) {
-             alert("Debes iniciar sesión para agregar favoritos.");
-        }
-        // No actualizamos el estado 'like' si la petición falla
+      console.error('Error en la gestión de favoritos:', error);
+      // Revertir el estado en caso de error
+      setIsLiked(!isLiked);
     }
-  }
-
-  
+  };
 
   return (
     <Card className="p-3 game-detail-card">
+            <Toaster position="top-right" reverseOrder={false} />
       <Row>
         <Col md={5}>
           <Image src={portada_url} alt={titulo} className="game-card-img" rounded />
@@ -56,9 +72,13 @@ export const LastGameCard = ({ id, portada_url, titulo, genero, descripcion, pla
               className="justify-content-between align-content-center"
             >
               <h3 className="m-0">{titulo}</h3>
-              <i onClick={handleLike}>
-                {like ? (
-                  <IoHeartSharp size={30} className="heart-outline" />
+              <i 
+                onClick={handleLike} 
+                style={{ cursor: 'pointer' }}
+                title={isLiked ? "Quitar de favoritos" : "Agregar a favoritos"}
+              >
+                {isLiked ? (
+                  <IoHeartSharp size={30} className="heart-outline"  />
                 ) : (
                   <IoHeartOutline size={30} className="heart-outline" />
                 )}
@@ -70,7 +90,7 @@ export const LastGameCard = ({ id, portada_url, titulo, genero, descripcion, pla
             <p>{descripcion}</p>
             <div>
               <Button size="sm" className="btn-primary mt-4">
-                Comprar
+                Comprar ${precio}
               </Button>
             </div>
           </Stack>

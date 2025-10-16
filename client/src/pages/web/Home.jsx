@@ -5,6 +5,7 @@ import { SectionTitle } from "../../components/common";
 import { GameCard, LastGameCard } from "../../components/web";
 import { Container, Row, Col } from "react-bootstrap";
 import gamesService from "../../api/games.js";
+import { FavoriteContext } from "../../contexts/FavoriteContext.jsx";
 
 export const Home = () => {
   const [games, setGames] = useState([]);
