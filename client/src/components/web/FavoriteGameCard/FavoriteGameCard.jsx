@@ -13,7 +13,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export const FavoriteGameCard = ({ id, usuario_id, juego_id, portada_url, titulo, genero, plataforma, precio }) => {
   // const {id, portada_url, titulo, genero, plataforma, precio} = game;
   const navigate = useNavigate();
-  const goToGame = () => navigate(`/games/${id}`)
+  const goToGame = () => navigate(`/games/${juego_id}`)
 
   const { addToCart, cart } = useContext(CartContext);
   const gameAdded = { id, portada_url, titulo, genero, plataforma, precio }
@@ -93,7 +93,7 @@ const handleLike = async () => {
         <div className="game-price">${precio}</div>
       </div>
       <Stack direction='horizontal' className='p-3 justify-content-between' gap={2}>
-        <Button variant="secondary" onClick={() => goToGame(id)} className='lh-1'>Ver más</Button>
+        <Button variant="secondary" onClick={() => goToGame(juego_id)} className='lh-1'>Ver más</Button>
         <Button onClick={() => { addToCart(gameAdded) }} className='lh-1'>Agregar al carrito</Button>
       </Stack>
     </div>
