@@ -3,7 +3,6 @@ import { createFavoriteModel, deleteFavoriteModel, getFavoritesByEmailModel } fr
 export const getFavoritesByEmail = async (req, res) => {
     try {
         const {email} = req.user
-        console.log(email)
         const favoritos = await getFavoritesByEmailModel(email);
         res.status(200).json({results:favoritos});
     } catch (error) {
@@ -27,10 +26,8 @@ export const createFavorite = async (req, res) => {
 
 export const deleteFavorite = async (req, res) => {
     try {
-        console.log('params',req.params)
-        console.log('body',req.body)
-
-        const { usuario_id, juego_id } = req.params;
+        
+        const { usuario_id, juego_id } = req.body;
         if(!usuario_id || !juego_id){
             res.status(400).json({ message: 'Bad Request. Faltan campos obligatorios'});
             return;

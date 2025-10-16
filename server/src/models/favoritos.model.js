@@ -4,6 +4,7 @@ export const getFavoritesByEmailModel = async (email) => {
     const querySQL = {
         text: `
     SELECT 
+        f.id,
         f.juego_id,
         j.titulo,
         j.genero,

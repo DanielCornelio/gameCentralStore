@@ -12,7 +12,6 @@ export const TopBar = ({ cartCount = 0 }) => {
   // const { isAuthenticated, logout } = useAuth();
 
   const {user, token, logout} = useContext(UserContext);
-  console.log("USEEEER", user)
 
   const handleLogout = () => {
     logout();

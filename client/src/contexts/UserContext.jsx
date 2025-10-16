@@ -40,10 +40,8 @@ const UserProvider = ({ children }) => {
         console.log(error.data.message);
         return error.response.data;
       }
-      console.log("response:", error.response);
     }
   };
-  console.log("USERR ", user);
 
   const isLogIn = () => {
     return token;
