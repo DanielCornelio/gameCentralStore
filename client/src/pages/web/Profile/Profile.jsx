@@ -1,9 +1,13 @@
-import React from 'react'
-import { Container, Row, Col, Card, Image, Badge } from 'react-bootstrap'
+import React, { useContext, useEffect, useState } from 'react'
+import { Container, Row, Col, Card, Image, Badge, Stack } from 'react-bootstrap'
 import { SectionTitle } from '../../../components'
 import './Profile.scss'
+import { UserContext } from '../../../contexts/UserContext'
 
 export const Profile = () => {
+
+  const { user } = useContext(UserContext)
+
   // Datos de ejemplo del usuario
   const userData = {
     name: "Pedro González",
@@ -23,27 +27,26 @@ export const Profile = () => {
       <SectionTitle title="Mi Perfil" />
 
       <Row className="mt-4">
+        <Col md={8} className='mx-auto mb-4'>
+          <Stack direction='horizontal' gap={4} className='justify-content-center align-items-center'>
+            <Image
+              src={user?.avatar_url || '../../../src/assets/img/user.png'}
+              roundedCircle
+              width="150"
+              height="150"
+              alt="Foto de perfil"
+            />
+            <Stack gap={2} className='justify-content-center'>
+              <p className='m-0'>
+                <h4 className="m-0 fs-1 d-inline">{user?.nombre + " " + user?.apellido || "nombre de usuario"}</h4>
+              <span className="ms-2 fs-5 text-gray">#{user?.username || "Username"}</span>
+              </p>
+              <p className="m-0 fs-5 text-purple">{user?.email} </p>
+            </Stack>
+        </Stack>
+        
+        </Col>
         <Col md={8} className="mx-auto">
-          {/* Información Personal */}
-          <Card className="shadow-sm mb-4">
-            <Card.Body className="p-4">
-              <div className="text-center mb-4">
-                <Image 
-                  src={userData.profileImage} 
-                  roundedCircle 
-                  width="120" 
-                  height="120"
-                  className="mb-3"
-                  alt="Foto de perfil"
-                />
-                <h4 className="mb-2">{userData.name}</h4>
-                <p className="text-muted mb-0">
-                  <strong>Puedes contactarme:</strong> {userData.email}
-                </p>
-              </div>
-            </Card.Body>
-          </Card>
-
           {/* Últimas Compras */}
           <Card className="shadow-sm">
             <Card.Header>

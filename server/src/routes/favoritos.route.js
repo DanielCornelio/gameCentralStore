@@ -6,6 +6,6 @@ const router = Router();
 
 router.get('/favoritos', verifyToken, getFavoritesByEmail);
 router.post('/favoritos', verifyToken, createFavorite)
-router.delete('/favoritos/:usuario_id/:juego_id', verifyToken, deleteFavorite);
+router.delete('/favoritos', verifyToken, deleteFavorite);
 
 export default router;

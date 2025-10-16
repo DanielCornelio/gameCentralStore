@@ -3,25 +3,25 @@ import pool from "../../db/config.js";
 export const getCartByEmailModel = async (email) => {
     const querySQL = {
         text: `
-    SELECT 
-        j.id,
-        j.titulo,
-        j.genero,
-        j.precio,
-        j.portada_url,
-        j.plataforma,
-        c.fecha_agregado,
-        c.cantidad,
-        c.usuario_id
-    FROM 
-        carrito c
-    LEFT JOIN 
-        usuarios u ON u.id = c.usuario_id
-    LEFT JOIN
-        juegos j ON j.id = c.juego_id
-    WHERE 
-        u.email = $1;`,
-        values: [email]
+        SELECT 
+            j.id,
+            j.titulo,
+            j.genero,
+            j.precio,
+            j.portada_url,
+            j.plataforma,
+            c.fecha_agregado,
+            c.cantidad,
+            c.usuario_id
+        FROM 
+            carrito c
+        LEFT JOIN 
+            usuarios u ON u.id = c.usuario_id
+        LEFT JOIN
+            juegos j ON j.id = c.juego_id
+        WHERE 
+            u.email = $1;`,
+            values: [email]
     }
     const { rows: carrito } = await pool.query(querySQL);
     return carrito;
