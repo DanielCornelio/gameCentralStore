@@ -87,9 +87,15 @@ export const LastGameCard = ({ id, portada_url, titulo, genero, descripcion, pla
             <span>
               <Chip title={genero} />
             </span>
-            <p>{descripcion}</p>
+            <p className="mb-0" style={{height: 165,
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 7, // Número de líneas que quieres mostrar
+              textOverflow: 'ellipsis',
+              whiteSpace: 'normal'}}>{descripcion}</p>
             <div>
-              <Button size="sm" className="btn-primary mt-4">
+              <Button size="sm" className="btn-primary ">
                 Comprar ${precio}
               </Button>
             </div>
