@@ -4,9 +4,8 @@ import { Games } from "../pages/web/Games";
 import { Profile } from "../pages/web/Profile";
 import { WebLayout } from "../layouts/web/WebLayout";
 import { Login, Register, GameDetail, Cart } from "../pages/web";
-import { Profile } from "../pages/admin/Profile";
-import { Password } from "../pages/admin/Password";
 import { Products } from "../pages/admin/Products";
+import { Password } from "../pages/admin/Password";
 
 const routes = createBrowserRouter([
   {
@@ -40,10 +39,6 @@ const routes = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
       },
     ],
   },
