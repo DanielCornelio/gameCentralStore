@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Navbar,
   Container,
@@ -12,15 +12,14 @@ import { FaShoppingCart, FaUser, FaSignInAlt } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import "./TopBar.scss";
+import { UserContext } from "../../../contexts/UserContext";
+import { IoHeartSharp } from "react-icons/io5";
 
 export const TopBar = ({ cartCount = 0 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { isAuthenticated, user, logout } = useAuth();
+  // const { isAuthenticated, logout } = useAuth();
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log("Buscar:", searchTerm);
-  };
+  const { user, token, logout } = useContext(UserContext);
 
   const handleLogout = () => {
     logout();
@@ -53,11 +52,11 @@ export const TopBar = ({ cartCount = 0 }) => {
             </Nav.Link>
           </Nav>
 
-          {isAuthenticated && (
+          {token && (
             <NavDropdown
               title={
                 <>
-                  <FaUser /> Hola, {user?.name}
+                  <FaUser /> Hola, {user?.username || user?.email}
                 </>
               }
               id="navbarScrollingDropdown"
@@ -75,13 +74,17 @@ export const TopBar = ({ cartCount = 0 }) => {
             </NavDropdown>
           )}
 
+          <Nav.Link as={NavLink} to="/favorites" className="mx-3 ">
+            <IoHeartSharp size={20} />
+          </Nav.Link>
+
           <Nav.Link as={NavLink} to="/cart" className="position-relative">
             <FaShoppingCart size={20} />
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </Nav.Link>
 
           <Nav className="d-flex align-items-center gap-2 ms-4">
-            {!isAuthenticated && (
+            {!token && (
               <>
                 <Button
                   as={Link}

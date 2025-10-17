@@ -1,9 +1,22 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import authService from '../api/auth';
+
 
 // Crear el contexto
 const AuthContext = createContext();
+
+const auth = async (credentials) => {
+  try {
+    const response = await authService.login(credentials);
+    console.log(`response ${response}`)
+    return response;
+  } catch (error) {
+    console.error("Error en la autenticación:", error);
+    throw error;
+  }
+}
 
 // Estados de autenticación
 const authReducer = (state, action) => {
@@ -90,20 +103,23 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: 'LOGIN_START' });
     
     try {
+    const response = await authService.login(credentials);
+
+    if(response.error) {
+      throw new Error(response.message);
+    }
+
       // Por ahora simulamos la autenticación (cambiar por API real en Hito 3)
       const mockResponse = {
-        token: 'mock-jwt-token-' + Date.now(),
+        token: response.data.token,
         user: {
-          id: 1,
-          email: credentials.email,
-          name: credentials.email.split('@')[0],
-          role: 'user'
+          email: response.data.user.email,
+          role: response.data.user.rol
         }
       };
 
       // Guardar en localStorage
       localStorage.setItem('token', mockResponse.token);
-      localStorage.setItem('user', JSON.stringify(mockResponse.user));
 
       dispatch({
         type: 'LOGIN_SUCCESS',
@@ -112,8 +128,8 @@ export const AuthProvider = ({ children }) => {
 
       toast.success('¡Sesión iniciada correctamente!');
       return true;
-    } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Error al iniciar sesión';
+    } catch (error) { debugger
+      const errorMessage = error || 'Error al iniciar sesión';
       dispatch({
         type: 'LOGIN_FAILURE',
         payload: errorMessage
@@ -148,7 +164,6 @@ export const AuthProvider = ({ children }) => {
   // Función de logout
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
     toast.success('Sesión cerrada correctamente');
   };
@@ -158,7 +173,8 @@ export const AuthProvider = ({ children }) => {
     ...state,
     login,
     register,
-    logout
+    logout,
+
   };
 
   return (

@@ -3,42 +3,35 @@ import { Button, Card, Col, Container, Row, Stack } from "react-bootstrap";
 import { GameDetailCard, SectionTitle, RatingComments, CommentModal } from "../../../components";
 import { CommentCard } from "../../../components/web/CommentCard/CommentCard";
 import { useLocation, useParams } from "react-router-dom";
-import toast from "react-hot-toast";
+import {Toaster, toast} from "react-hot-toast";
 import { gamesData } from "../../../data/games";
+import gamesService from "../../../api/games";
 
 export const GameDetail = () => {
-  const [info, setInfo] = useState({})
+  const [game, setGame] = useState({});
   const {id} = useParams();
+  const location = useLocation();
 
- const location = useLocation();
-
-  useEffect(() => {
-    // Scroll al top cuando el componente se monta
-    window.scrollTo(0, 0);
-  }, [location.pathname]); // Se ejecuta cuando cambia la ruta
-
-  
-  useEffect(() => {
-    getData()
-  }, [id])
-
-
-  const getData = async () => {
+  const getGame = async () => {
     try {
-      const response =  await gamesData.find(game => game.id === parseInt(id));
-       if (response) {
-        setInfo(response);
-      } else {
-        toast.error('Juego no encontrado');
-      }
+      const data = await gamesService.getGameById(id);
+      (data) ? setGame(data) : toast.error("Juego no encontrado");
     } catch (error) {
       toast.error('No se pudo establecer conexión con el servidor');
+      console.log(error)
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getGame()
+  }, [id, location.pathname])
+  console.log(game)
   
   return (
     <Container>
-      <GameDetailCard {...info} />
+      <Toaster position="top-right" reverseOrder={true} />
+      <GameDetailCard {...game} />
       <SectionTitle title="Comentarios" />
       <Row>
         <Col md={3}>

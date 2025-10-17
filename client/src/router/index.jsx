@@ -3,9 +3,8 @@ import { Home } from "../pages/web/Home";
 import { Games } from "../pages/web/Games";
 import { Profile } from "../pages/web/Profile";
 import { WebLayout } from "../layouts/web/WebLayout";
-import { Login, Register, GameDetail, Cart } from "../pages/web";
-import { Products } from "../pages/admin/Products";
-import { Password } from "../pages/admin/Password";
+import { Login2, Register, GameDetail, Cart, Favorites } from "../pages/web";
+import { ProtectedRoute } from "../components";
 
 const routes = createBrowserRouter([
   {
@@ -26,19 +25,27 @@ const routes = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/password",
-        element: <Password />,
-      },
-      {
-        path: "/products",
-        element: <Products />,
+        path: "/favorites",
+        element: (
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -47,7 +54,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <Login2 />,
   },
   {
     path: "/register",

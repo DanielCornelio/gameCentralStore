@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import Carrousel from "../../components/Carrousel/Carrousel";
-import { SectionTitle } from "../../components";
+import { SectionTitle } from "../../components/common";
 import { GameCard, LastGameCard } from "../../components/web";
 import { Container, Row, Col } from "react-bootstrap";
-import { gamesData } from "../../data/games";
-export const Home = () => {
-  // Obtener algunos juegos para mostrar como destacados
-  const featuredGames = gamesData.slice(0, 4);
-  const recentGames = gamesData.slice(0, 2);
+import gamesService from "../../api/games.js";
+import { FavoriteContext } from "../../contexts/FavoriteContext.jsx";
 
- 
+export const Home = () => {
+  const [games, setGames] = useState([]);
+
+
+  const getGames = async () => {
+    try {
+      const data = await gamesService.getAllGames();
+      setGames(data);
+    } catch (error) {
+      toast.error("Error al cargar los juegos", error)
+    }
+  }
+
+  useEffect(() => {
+    getGames();
+  }, [])
+
+  
+
   return (
     <Container>
+      <Toaster position="top-right" reverseOrder={true} />
       <Row>
         <Col xs={12}>
           <Carrousel />
@@ -21,7 +38,7 @@ export const Home = () => {
       <SectionTitle title="ÚLTIMAS PUBLICACIONES DE ESTE MES" />
 
       <Row className="d-flex justify-content-between">
-        {recentGames.map((game) => (
+        {games.slice(0,2).map((game) => (
           <Col key={game.id} md={6}>
             <LastGameCard  {...game} />
           </Col>
@@ -30,9 +47,9 @@ export const Home = () => {
       
       <SectionTitle title="Juegos destacados" />
       <Row>
-        {featuredGames.map((game) => (
+        {games.map((game) => (
           <Col key={game.id} xs={12} md={6} lg={3} className="mb-4">
-            <GameCard game={game} />
+            <GameCard {...game} />
           </Col>
         ))}
       </Row>

@@ -26,13 +26,16 @@ export const useGameFilters = (games) => {
       return matchesSearch && matchesGenre && matchesPlatform && matchesPrice;
     });
 
+    // Crear una copia antes de ordenar para no mutar el array original
+    let sorted = [...filtered];
+    
     if (sortBy === 'name') {
-      filtered.sort((a, b) => a.title.localeCompare(b.title));
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortBy === 'price') {
-      filtered.sort((a, b) => a.price - b.price);
+      sorted.sort((a, b) => a.price - b.price);
     }
 
-    return filtered;
+    return sorted;
   }, [games, searchTerm, filters, sortBy]);
 
   return {
