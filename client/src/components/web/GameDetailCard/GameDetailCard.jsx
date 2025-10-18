@@ -33,7 +33,7 @@ export const GameDetailCard = ({ portada_url, titulo, genero,fecha_lanzamiento, 
                 </Stack>
                 <Stack direction="vertical" gap={3}>
                   <span><Chip title={genero} /></span>
-                  <p className="mb-0"><span className="fw-bold">Fecha de lanzamiento:</span> {fecha_lanzamiento}</p>
+                  <p className="mb-0"><span className="fw-bold">Fecha de lanzamiento:</span> {new Date(fecha_lanzamiento).toLocaleDateString()}</p>
                   <p className="mb-0">{descripcion}</p>
                 </Stack>
               </Stack>

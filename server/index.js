@@ -8,6 +8,7 @@ import juegosRoutes from './src/routes/juegos.route.js'
 import favoritosRoutes from './src/routes/favoritos.route.js'
 import carritoRoutes from './src/routes/carrito.route.js'
 import perfilRoutes from './src/routes/perfil.route.js'
+import ratingsRoutes from './src/routes/ratings.route.js'
 
 
 const app = express();
@@ -26,6 +27,8 @@ app.use('/api', juegosRoutes);
 app.use('/api', favoritosRoutes);
 app.use('/api', carritoRoutes);
 app.use('/api', perfilRoutes);
+app.use('/api', ratingsRoutes);
+
 
 
 app.listen(PORT, () => {
