@@ -4,21 +4,31 @@ import { UserContext } from '../../../contexts/UserContext';
 import { GameCard, SectionTitle } from '../../../components';
 import { FavoriteContext } from '../../../contexts/FavoriteContext';
 import { FavoriteGameCard } from '../../../components/web/FavoriteGameCard';
+import { Toaster } from 'react-hot-toast';
 
 export const Favorites = () => {
     const { listFavorites, getFavorites } = useContext(FavoriteContext);
     const { user, token } = useContext(UserContext);
-const [refreshKey, setRefreshKey] = useState(0); // Key para forzar rerender
 
     // Recargar favoritos cuando el componente se monte o cuando refreshKey cambie
     useEffect(() => {
         if (user && token) {
-            getFavorites();
+            loadFavorites();
         }
-    }, [user, token, refreshKey]);
+    }, [user, token]);
 
-    const handleRefresh = () => {
-        setRefreshKey(prev => prev + 1); // Forzar recarga
+    const loadFavorites = async() =>{
+         if (user && token) {
+            try {
+                await getFavorites();
+            } catch (error) {
+                console.error("Error loading favorites:", error);
+            }
+        }
+    }
+
+    const handleFavoriteRemoved = async () => {
+        await loadFavorites(); // Recargar la lista después de eliminar
     };
 
     if (!user) {
@@ -33,6 +43,7 @@ const [refreshKey, setRefreshKey] = useState(0); // Key para forzar rerender
 
     return (
         <Container>
+            <Toaster position="top-right" reverseOrder={true} />
             <SectionTitle title='Tus Juegos Favoritos'/>
 
             {listFavorites.length === 0 ? (
@@ -45,6 +56,7 @@ const [refreshKey, setRefreshKey] = useState(0); // Key para forzar rerender
                         <FavoriteGameCard 
                             key={favorito.id} 
                             {...favorito} 
+                            onFavoriteRemoved={handleFavoriteRemoved} 
                         />
                     ))}
                 </Stack>

@@ -25,12 +25,19 @@ export const getUserByEmail = async (req, res) => {
 
 export const register = async (req, res) =>{
     try {
-        const {email, password_hash} = req.body;
+        const {email, password_hash, username, nombre, apellido, pais,avatar_url,fecha_nacimiento} = req.body;
         if(!email || !password_hash){
             res.status(400).json({ message: 'Faltan datos obligatorios' })
             return;
         }
-        const nuevoUsuario = await createUserModel(email, password_hash);
+
+        const existingUser = await getUserByEmailModel(email);
+        if(existingUser){
+            res.status(409).json({message: 'El email ya esta registrado'}) 
+            return
+        }
+
+        const nuevoUsuario = await createUserModel({email, password_hash, username, nombre, apellido, pais,avatar_url,fecha_nacimiento});
         res.status(201).json(nuevoUsuario);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });

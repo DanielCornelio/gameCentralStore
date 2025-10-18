@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import authService from "../api/auth";
-import toast from "react-hot-toast";
 import usuariosService from "../api/usuarios";
 
 export const UserContext = createContext();
@@ -37,7 +36,6 @@ const UserProvider = ({ children }) => {
       return response;
     } catch (error) {
       if (error.response) {
-        console.log(error.data.message);
         return error.response.data;
       }
     }

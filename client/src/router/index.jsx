@@ -3,7 +3,7 @@ import { Home } from "../pages/web/Home";
 import { Games } from "../pages/web/Games";
 import { Profile } from "../pages/web/Profile";
 import { WebLayout } from "../layouts/web/WebLayout";
-import { Login2, Register, GameDetail, Cart, Favorites } from "../pages/web";
+import { Login2, Register2, GameDetail, Cart, Favorites } from "../pages/web";
 import { ProtectedRoute } from "../components";
 
 const routes = createBrowserRouter([
@@ -58,7 +58,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <Register />,
+    element: <Register2 />,
   },
 ]);
 

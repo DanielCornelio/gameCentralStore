@@ -26,7 +26,6 @@ export const GameDetail = () => {
     window.scrollTo(0, 0);
     getGame()
   }, [id, location.pathname])
-  console.log(game)
   
   return (
     <Container>
