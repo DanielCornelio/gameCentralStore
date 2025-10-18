@@ -43,7 +43,6 @@ const handleLike = async () => {
       usuario_id: user.id,
       juego_id: juego_id
     };
-    console.log(data)
     try {
       if (isLiked) {
         // Remover de favoritos
@@ -68,10 +67,9 @@ const handleLike = async () => {
       setIsLiked(!isLiked);
     }
   };
-
+  
   return (
     <div className="game-card" >
-      
       <div className="game-image position-relative">
         <img src={portada_url || '/placeholder-game.jpg'} alt={titulo} />
         <i className='z-3 position-absolute'

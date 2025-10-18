@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.scss";
 import {
   Col,
@@ -20,9 +20,12 @@ export const Login2 = () => {
   const navigate = useNavigate()
   const { login, token } = useContext(UserContext)
 
-  if(token){
+  useEffect(() => {
+    if(token){
     navigate("/")
   }
+  }, [navigate])
+  
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -31,7 +34,9 @@ export const Login2 = () => {
       const response = await login(credenciales);
       console.log(response.data.token)
       if (response.data.token) {
-        toast.success('Login exitoso');
+        toast.success('Login exitoso', {
+          duration: 1000
+        });
         navigate('/');  
       }
     } catch (error) {
@@ -92,9 +97,7 @@ export const Login2 = () => {
                     }
                   })}
                 />
-                {
-                  errors.password_hash && <span className="text-error">{errors.password_hash.message}</span>
-                }
+                
                 <span
                   className="show-password position-absolute"
                   onClick={togglePasswordVisibility}
@@ -109,7 +112,9 @@ export const Login2 = () => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </FloatingLabel>
-
+{
+                  errors.password_hash && <span className="text-error">{errors.password_hash.message}</span>
+                }
             </div>
 
             <div className="d-grid">

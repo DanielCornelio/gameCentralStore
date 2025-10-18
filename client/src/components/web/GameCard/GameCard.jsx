@@ -70,7 +70,6 @@ const handleLike = async () => {
 
   return (
     <div className="game-card" >
-      
       <div className="game-image position-relative">
         <img src={portada_url || '/placeholder-game.jpg'} alt={titulo} />
         <i className='z-3 position-absolute'

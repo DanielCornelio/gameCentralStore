@@ -60,7 +60,6 @@ export const LastGameCard = ({ id, portada_url, titulo, genero, descripcion, pla
 
   return (
     <Card className="p-3 game-detail-card">
-            <Toaster position="top-right" reverseOrder={false} />
       <Row>
         <Col md={5}>
           <Image src={portada_url} alt={titulo} className="game-card-img" rounded />
