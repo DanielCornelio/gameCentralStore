@@ -112,7 +112,7 @@ export const Login2 = () => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </FloatingLabel>
-{
+             {
                   errors.password_hash && <span className="text-error">{errors.password_hash.message}</span>
                 }
             </div>

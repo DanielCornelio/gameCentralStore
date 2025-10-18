@@ -9,7 +9,8 @@ label,
 input[type="email"],
 input[type="password"],
 input[type="text"],
-textarea {
+textarea,
+.form-select {
   background-color: $background-gray !important;
   border: 1px solid $secondary !important;
   color: $text-light !important;
