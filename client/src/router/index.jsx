@@ -25,16 +25,28 @@ const routes = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: (<ProtectedRoute><Cart/></ProtectedRoute>),
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profile",
-        element: (<ProtectedRoute><Profile/></ProtectedRoute>),
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/favorites",
-        element: (<ProtectedRoute><Favorites/></ProtectedRoute>)
-      }
+        element: (
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
@@ -42,7 +54,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/login",
-    element: (<Login2/>)
+    element: <Login2 />,
   },
   {
     path: "/register",

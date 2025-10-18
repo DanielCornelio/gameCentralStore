@@ -1,13 +1,13 @@
 import React from "react";
 import { SectionTitle } from "../../components";
 import { Container, Row, Col, Stack } from "react-bootstrap";
-import { PersonalInfo } from "../../components/admin/PersonalInfo/PersonalInfo";
+import { ManagePassword } from "../../components";
 
-export const Profile = () => {
+export const Password = () => {
   return (
     <Container>
-      <SectionTitle title="Información Personal" />
-      <PersonalInfo />
+      <SectionTitle title="Seguridad" />
+      <ManagePassword />
     </Container>
   );
 };
