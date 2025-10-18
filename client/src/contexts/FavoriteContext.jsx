@@ -15,7 +15,7 @@ const FavoriteProvider = ({ children }) => {
       const response = await favoritesService.addToFavorite(data, token);
       if (response.success) {
         // Actualizar la lista local después de agregar
-        setListFavorites(prev => [...prev, response.data]);
+        setListFavorites((prev) => [...prev, response.data]);
         toast.success("Agregado a favoritos");
       }
       return response;
@@ -26,14 +26,12 @@ const FavoriteProvider = ({ children }) => {
   };
 
   const removeFavorites = async (data) => {
-    console.log("datttttaaa:",data)
     try {
       const response = await favoritesService.removeFavorites(data);
       if (response.success) {
         // Actualizar la lista local después de eliminar
-        setListFavorites(prev => prev.filter(fav => 
-          !(fav.usuario_id === data.usuario_id && fav.juego_id === data.juego_id)
-        ));
+        const updateList = getFavorites()
+        setListFavorites(updateList);
         toast.success("Eliminado de favoritos");
       }
       return response;
@@ -45,15 +43,36 @@ const FavoriteProvider = ({ children }) => {
 
   const getFavorites = async () => {
     try {
-      if (user?.id && token) {
-        const response = await favoritesService.getFavoritesByEmail(user.id, token);
+      if (!user?.id && !token) {
+        const response = await favoritesService.getFavoritesByEmail(
+          user.id,
+          token
+        );
+        setListFavorites([]);
+        return;
+      }
+      
+      const response = await favoritesService.getFavoritesByEmail(
+        user.id,
+        token
+      );
+
+      // Verificación segura de la respuesta
+      if (response && response.data) {
         setListFavorites(response.data.results || response.data || []);
-        await getFavorites();
+      } else {
+        setListFavorites([]);
       }
     } catch (error) {
-      console.error("Error al cargar los favoritos:", error);
+       if (error.response?.status === 401 || error.response?.status === 403) {
+      toast.error("Sesión expirada");
+      // Aquí podrías limpiar el token y redirigir al login
+      setListFavorites([]);
+    } else {
       toast.error("Error al cargar los favoritos");
     }
+    console.error("Error en getFavorites:", error);
+  }
   };
 
   // Cargar favoritos cuando el usuario cambie
@@ -70,7 +89,7 @@ const FavoriteProvider = ({ children }) => {
     getFavorites,
     removeFavorites,
     listFavorites,
-    setListFavorites
+    setListFavorites,
   };
 
   return (
