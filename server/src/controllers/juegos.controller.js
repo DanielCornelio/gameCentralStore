@@ -1,9 +1,19 @@
-import { createGameModel, deleteGameModel, getGameByIdModel, getGamesModel, updateGameModel } from "../models/juegos.model.js";
+import { createGameModel, deleteGameModel, findGamesModel, getGameByIdModel, getGamesModel, updateGameModel } from "../models/juegos.model.js";
 
 export const getAllGames = async (req, res) => {
     try {
         const juegos = await getGamesModel();
         res.status(200).json({results:juegos})
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
+
+export const findGamesWithFilters = async(req, res) => {
+    try {
+        const queryString = req.query;
+        const juegos = await findGamesModel(queryString);
+        res.status(200).json({results:juegos});
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }

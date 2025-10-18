@@ -15,6 +15,7 @@ const UserProvider = ({ children }) => {
     if(token){
       const response = await usuariosService.me()
       if(response.error || response.status != 200 ){
+        logout()
         return
       }
       setUser(response.data.results)

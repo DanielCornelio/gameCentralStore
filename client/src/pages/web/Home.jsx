@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import Carrousel from "../../components/Carrousel/Carrousel";
+import Carrousel from "../../components/web/Carrousel/Carrousel.jsx";
 import { SectionTitle } from "../../components/common";
 import { GameCard, LastGameCard } from "../../components/web";
 import { Container, Row, Col } from "react-bootstrap";

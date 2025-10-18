@@ -1,8 +1,8 @@
 import Carousel from "react-bootstrap/Carousel";
-import eldenring from "../../assets/img/Elden-Ring-1.webp";
-import gowr from "../../assets/img/God-of-War-Ragnarok.webp";
-import wukong from "../../assets/img/Black-Myth-WuKong.webp";
-import kingdom from "../../assets/img/Kingdom-Come-Deliverance-2.webp";
+import eldenring from "../../../assets/img/Elden-Ring-1.webp";
+import gowr from "../../../assets/img/God-of-War-Ragnarok.webp";
+import wukong from "../../../assets/img/Black-Myth-WuKong.webp";
+import kingdom from "../../../assets/img/Kingdom-Come-Deliverance-2.webp";
 
 function Carrousel() {
   const images = [

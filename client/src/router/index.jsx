@@ -5,6 +5,7 @@ import { Profile } from "../pages/web/Profile";
 import { WebLayout } from "../layouts/web/WebLayout";
 import { Login2, Register2, GameDetail, Cart, Favorites } from "../pages/web";
 import { ProtectedRoute } from "../components";
+import AdminLayout from "../layouts/admin/AdminLayout";
 
 const routes = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/admin",
+    element: <AdminLayout/>
   },
   {
     path: "/login",
