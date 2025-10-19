@@ -8,15 +8,21 @@ import toast from "react-hot-toast";
 
 
 export const CommentModal = ({ showModal, setShowModal, usuario_id, juego_id, onCommentAdded }) => {
-  const handleCloseModal = () => setShowModal(false);
+  
+  const handleCloseModal = () => {
+    reset();
+    setShowModal(false);
+  }
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = handleSubmit( async (data) => {
     try {
       const response = await ratingsService.createRatings({...data, usuario_id, juego_id})
       toast.success(response.message);
+      reset();
       if (onCommentAdded) {
+    
       onCommentAdded(); // Llamar a la función de éxito
     }
     } catch (error) {

@@ -4,7 +4,7 @@ import { Card, Col, Image, Stack } from 'react-bootstrap'
 import { FaStar } from "react-icons/fa";
 
 
-export const CommentCard = ({juego_id, usuario_id, username, avatar_url,calificacion, titulo, comentario, fecha_creacion}) => {
+export const CommentCard = ({juego_id, usuario_id, username,email, avatar_url,calificacion, titulo, comentario, fecha_creacion}) => {
   return (
     <Card className='p-3 bg-gray'>
         <Stack direction='horizontal' className='align-align-align-items-start'>
@@ -13,7 +13,7 @@ export const CommentCard = ({juego_id, usuario_id, username, avatar_url,califica
                     <Image src={avatar_url|| 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} className='w-100'  roundedCircle/>
                 </Col>
                 <Col md={4}>
-                    <h5 className='comment-card-title m-0'>{username}</h5>
+                    <h5 className='comment-card-title m-0'>{username || email}</h5>
                     <p className='text-light m-0'>{new Date(fecha_creacion).toLocaleDateString()}</p>
                 </Col>
             </div>

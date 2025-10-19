@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Row, Col, Badge, Stack } from "react-bootstrap";
+import {
+  Modal,
+  Button,
+  Form,
+  Row,
+  Col,
+  Badge,
+  Stack,
+  FloatingLabel,
+} from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import gamesService from "../../../api/games";
+import toast from "react-hot-toast";
+import { GrClose } from "react-icons/gr";
 
-export const ProductModal = ({ onSave, onUpdate, productEdit }) => {
-  const [show, setShow] = useState(false);
+export const ProductModal = ({ showModal, setShowModal, onSave, onUpdate, productEdit, user, onCommentAdded }) => {
+  
   const [formData, setFormData] = useState({
     id: null,
     titulo: "",
@@ -15,6 +28,21 @@ export const ProductModal = ({ onSave, onUpdate, productEdit }) => {
     precio: "",
   });
 
+
+  const handleCloseModal = () => {
+    reset();
+    setShowModal(false);
+  }
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  
+
   useEffect(() => {
     if (productEdit) {
       setFormData(productEdit);
@@ -22,20 +50,6 @@ export const ProductModal = ({ onSave, onUpdate, productEdit }) => {
     }
   }, [productEdit]);
 
-  const handleClose = () => {
-    setShow(false);
-    setFormData({
-      id: null,
-      titulo: "",
-      imagen: null,
-      descripcion: "",
-      plataforma: "",
-      genero: "",
-      activo: true,
-      stock: "",
-      precio: "",
-    });
-  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -55,36 +69,182 @@ export const ProductModal = ({ onSave, onUpdate, productEdit }) => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.id) {
-      onUpdate(formData);
-    } else {
-      onSave(formData);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const response = await gamesService.createGame({
+        ...data,
+        usuario_id: user.id,
+      });
+      toast.success(response.message);
+      reset();
+      if (onCommentAdded) {
+        onCommentAdded(); // Llamar a la función de éxito
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error("Error al crear el juego");
     }
-    handleClose();
-  };
+  });
 
   return (
     <>
-      {!productEdit && (
-        <Button variant="primary" onClick={() => setShow(true)}>
-          Agregar producto
-        </Button>
-      )}
 
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
+      <Modal show={showModal} backdrop="static" keyboard={false} centered size="md">
+        <Modal.Header className="border-0">
           <Modal.Title>
-            {" "}
             {formData.id ? "Editar producto" : "Registrar producto"}
           </Modal.Title>
+          <GrClose size={20} className="btn-close" onClick={handleCloseModal} />
         </Modal.Header>
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={onSubmit}>
           <Modal.Body>
             <Row className="g-1">
-              <div className="mb-4">
+              <div className="mb-2">
+                <FloatingLabel label="Título">
+                  <Form.Control
+                    type="text"
+                    placeholder=""
+                    {...register("titulo", {
+                      required: "El título es requerido",
+                    })}
+                  />
+                </FloatingLabel>
+                {errors.titulo && (
+                  <span className="text-error">{errors.titulo.message}</span>
+                )}
+              </div>
+
+              <div className="mb-2">
+                <FloatingLabel label="URL imagen">
+                  <Form.Control
+                    type="text"
+                    placeholder=""
+                    {...register("portada_url", {
+                      required: "La url de la imagen es requerida",
+                    })}
+                  />
+                </FloatingLabel>
+                {errors.portada_url && (
+                  <span className="text-error">
+                    {errors.portada_url.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="mb-2">
+                <FloatingLabel
+                  label="Descripción"
+                  className="custom-floating-label"
+                >
+                  <Form.Control
+                    as="textarea"
+                    placeholder=""
+                    style={{ height: "150px" }}
+                    {...register("descripcion", {
+                      required: "La descripcion es requerida",
+                    })}
+                  />
+                </FloatingLabel>
+                {errors.descripcion && (
+                  <span className="text-error">
+                    {errors.descripcion.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="d-flex gap-3">
+                <Col>
+                  <div className="mb-3">
+                    <FloatingLabel label="Stock">
+                      <Form.Control
+                        type="number"
+                        placeholder=""
+                        {...register("stock", {
+                          required: "El stock es requerido",
+                          valueAsNumber: true,
+                        })}
+                      />
+                    </FloatingLabel>
+                    {errors.stock && (
+                      <span className="text-error">{errors.stock.message}</span>
+                    )}
+                  </div>
+                </Col>
+                <Col>
+                  <div className="mb-3">
+                    <FloatingLabel label="Precio">
+                      <Form.Control
+                        type="number"
+                        placeholder=""
+                        {...register("precio", {
+                          required: "El precio es requerido",
+                          valueAsNumber: true,
+                        })}
+                      />
+                    </FloatingLabel>
+                    {errors.precio && (
+                      <span className="text-error">
+                        {errors.precio.message}
+                      </span>
+                    )}
+                  </div>
+                </Col>
+              </div>
+
+              <div className="d-flex gap-3">
+                <Col>
+                  <div className="mb-2">
+                    <FloatingLabel
+                      label="Plataforma"
+                    >
+                      <Form.Select
+                        {...register("plataforma", {
+                          required: "Debes seleccionar una opción",
+                        })}
+                      >
+                        <option>Selecciona una opción</option>
+                        <option value="PC">PC</option>
+                        <option value="PlayStation">PlayStation</option>
+                        <option value="Xbox">Xbox</option>
+                        <option value="Nintendo">Nintendo</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                    {errors.plataforma && (
+                      <span className="text-error">
+                        {errors.plataforma.message}
+                      </span>
+                    )}
+                  </div>
+                </Col>
+                <Col>
+                  <div>
+                    <FloatingLabel label="Genero">
+                      <Form.Select
+                        {...register("genero", {
+                          required: "Debes seleccionar una opción",
+                        })}
+                      >
+                        <option>Selecciona una opción</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="RPG">RPG</option>
+                        <option value="Estrategia">Estrategia</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Shooter">Shooter</option>
+                        <option value="Shooter">Horror</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                    {errors.genero && (
+                      <span className="text-error">
+                        {errors.genero.message}
+                      </span>
+                    )}
+                  </div>
+                </Col>
+              </div>
+
+              {/* <div className="mb-4">
                 <Form.Group className="mb-3">
                   <Form.Label>Título*</Form.Label>
                   <Form.Control
@@ -181,7 +341,7 @@ export const ProductModal = ({ onSave, onUpdate, productEdit }) => {
                     <option value="Shooter">Horror</option>
                   </Form.Select>
                 </Form.Group>
-              </div>
+              </div> */}
 
               <Col md={12}>
                 <Form.Check
@@ -196,7 +356,7 @@ export const ProductModal = ({ onSave, onUpdate, productEdit }) => {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleCloseModal}>
               Cancelar
             </Button>
             <Button variant="primary" type="submit">

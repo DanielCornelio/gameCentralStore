@@ -12,6 +12,7 @@ export const getRatingsModel = async (juego_id) => {
                 r.fecha_creacion, 
                 r.titulo, 
                 u.username,
+                u.email,
                 u.avatar_url
             FROM ratings r
             LEFT JOIN 
