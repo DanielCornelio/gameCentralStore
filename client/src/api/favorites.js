@@ -18,7 +18,6 @@ const favoritesService = {
         }
     },
     removeFavorites: async (data) =>{ 
-        console.log("dAtA::", data)
         try {
             
             const response = await client.delete("/favoritos", {data})

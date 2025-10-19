@@ -16,9 +16,6 @@ import { UserContext } from "../../../contexts/UserContext";
 import { IoHeartSharp } from "react-icons/io5";
 
 export const TopBar = ({ cartCount = 0 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  // const { isAuthenticated, logout } = useAuth();
-
   const { user, token, logout } = useContext(UserContext);
 
   const handleLogout = () => {
@@ -62,6 +59,8 @@ export const TopBar = ({ cartCount = 0 }) => {
               id="navbarScrollingDropdown"
             >
               <NavDropdown.Item as={NavLink} to="/profile">Mi perfil</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/admin/settings">Configuración</NavDropdown.Item>
+
               {
                 user?.rol == "admin" && (
               <NavDropdown.Item as={NavLink} to="/admin">Admin</NavDropdown.Item>

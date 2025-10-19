@@ -1,48 +1,64 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SectionTitle } from "../../components";
-import { Container, Row, Col, Stack, Button, Table } from "react-bootstrap";
+import { Container, Stack, Button, Table } from "react-bootstrap";
 import { ProductModal } from "../../components";
 import gamesService from "../../api/games";
 import { UserContext } from "../../contexts/UserContext";
-import { client } from "../../api/constans";
 import toast from "react-hot-toast";
 
 export const Products = () => {
-  const [productos, setProductos] = useState([]);
   const [productoEditando, setProductoEditando] = useState(null);
-
   const { user, token } = useContext(UserContext);
-  console.log(user);
 
   const [games, setGames] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+
   const getGames = async () => {
     try {
-      const data = await gamesService.getAllGames();
+      const data = await gamesService.getAllGames()
+
       setGames(data);
+ 
     } catch (error) {
       toast.error("No se pudo establecer conexión con el servidor");
     }
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setProductoEditando(null);
+  };
+
   const handleCommentAdded = () => {
     getGames();
-    setShowModal(false);
+    handleCloseModal()
   };
 
   useEffect(() => {
     getGames();
   }, []);
 
-  // Editar producto
-  const handleUpdateProduct = (productoActualizado) => {
-    setProductos((prev) =>
-      prev.map((prod) =>
-        prod.id === productoActualizado.id ? productoActualizado : prod
-      )
-    );
-    setProductoEditando(null);
+  // Función para abrir edición
+  const handleEditProduct = (producto) => {
+    setProductoEditando(producto);
+    setShowModal(true);
+  };
+
+  // Función para actualizar producto
+  const handleUpdateProduct = async (productoActualizado) => {
+    try {
+      const response = await gamesService.updateGame(
+        productoEditando.id, 
+        productoActualizado
+      );
+      console.log(response)
+      toast.success(response.data.message || "Producto actualizado correctamente");
+      handleCommentAdded();
+    } catch (error) {
+      console.log(error)
+      toast.error(error.data.message || "Error al actualizar el producto");
+    }
   };
 
   // Eliminar producto
@@ -57,7 +73,7 @@ export const Products = () => {
   };
 
   return (
-    <Container>
+    <Container className="mb-4">
       <Stack
         direction="horizontal"
         className="align-items-center justify-content-between"
@@ -108,7 +124,7 @@ export const Products = () => {
                   variant="primary"
                   size="sm"
                   className="me-2"
-                  onClick={() => setProductoEditando(prod)}
+                  onClick={() => handleEditProduct(prod)}
                 >
                   Editar
                 </Button>
@@ -130,16 +146,10 @@ export const Products = () => {
         setShowModal={setShowModal}
         user={user}
         onCommentAdded={handleCommentAdded}
-      />
+        productEdit={productoEditando}
+        onUpdate={handleUpdateProduct}
 
-      {productoEditando && (
-        <ProductModal
-          onUpdate={handleUpdateProduct}
-          productEdit={productoEditando}
-          user={user}
-          onCommentAdded={handleCommentAdded}
-        />
-      )}
+      />
     </Container>
   );
 };

@@ -84,9 +84,9 @@ export const createGameModel = async ({titulo, descripcion, precio, precio_descu
     return nuevoJuego;
 } 
 
- export const updateGameModel = async ( {titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero, plataforma, edad_minima, id} ) => {
+ export const updateGameModel = async ( {titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero, stock, plataforma, edad_minima, id} ) => {
     const querySQL = {
-        text: 'UPDATE juegos SET titulo=$1, descripcion=$2, precio=$3, precio_descuento=$4, desarrollador=$5, fecha_lanzamiento=$6, portada_url=$7, genero=$8, stock=$9, plataforma=$10, edad_minima=$11, WHERE id=$12 RETURNING *',
+        text: 'UPDATE juegos SET titulo=$1, descripcion=$2, precio=$3, precio_descuento=$4, desarrollador=$5, fecha_lanzamiento=$6, portada_url=$7, genero=$8, stock=$9, plataforma=$10, edad_minima=$11 WHERE id=$12 RETURNING *',
         values: [titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima, id]
     }
 

@@ -51,7 +51,7 @@ export const updateGame = async (req, res) => {
         if(!id) {
             res.status(400).json({ message: 'Bad Request. Faltan campos obligatorios'});
         }
-        const {titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero, plataforma, edad_minima} = req.body;
+        const {titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima} = req.body;
 
         const juegoActualizado = await updateGameModel({titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima, id});
         if(juegoActualizado.length === 0 ){
