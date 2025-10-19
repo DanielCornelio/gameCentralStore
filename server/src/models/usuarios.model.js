@@ -29,15 +29,16 @@ export const createUserModel = async ({email, password_hash, username, nombre, a
     return nuevoUsuario;
 } 
 
-export const updateUserModel = async (email, password_hash, id) => {
+export const updatePasswordModel = async (password_hash, id) => {
     const hashedPassword = bcrypt.hashSync(password_hash, 10);
     const querySQL = {
-        text: 'UPDATE usuarios SET email = $1, password_hash = $2 WHERE id = $3 RETURNING *',
-        values: [email, hashedPassword, id]
+        text: 'UPDATE usuarios SET password_hash = $1 WHERE id = $2 RETURNING *',
+        values: [hashedPassword, id]
     }
     const { rows: usuarioActualizado } = await pool.query(querySQL)
     return usuarioActualizado;
 }
+
 
 export const deleteUserModel = async (id) => {
     const querySQL = {

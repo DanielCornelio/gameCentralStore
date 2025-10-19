@@ -12,7 +12,7 @@ export const Register2 = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -108,13 +108,15 @@ export const Register2 = () => {
               controlId="floatingSelectGrid"
               label="Selecciona tu país"
             >
-              <Form.Select aria-label="Floating label select example">
+              <Form.Select aria-label="Floating label select example" {...register("pais",{required:"El país es requerido"})}>
                 <option>Selecciona una opción del menu</option>
                 <option value="cl">Chile</option>
                 <option value="mx">México</option>
               </Form.Select>
             </FloatingLabel>
-
+              {
+                errors.pais && <span className="text-error">{errors.pais.message}</span>
+              }
             <div>
               <FloatingLabel
                 label="Ingresa tu contraseña"
@@ -160,6 +162,10 @@ export const Register2 = () => {
                   type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
                   placeholder=""
+                  {...register("confirmPassword", {
+                    required: "La contraseña es requerida",
+                    validate: value => value === watch ('password_hash') || 'Las constrseñas no coinciden'
+                  })}
                 />
                 <span
                   className="show-password position-absolute"
@@ -175,6 +181,9 @@ export const Register2 = () => {
                   {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </FloatingLabel>
+              {
+                errors.confirmPassword && <span className="text-error">{errors.confirmPassword.message}</span>
+              }
             </div>
 
             <div>
