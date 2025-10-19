@@ -15,11 +15,11 @@ export const GameDetail = () => {
     const [showModal, setShowModal] = useState(false);
   
   const {id} = useParams();
-  const location = useLocation();
+
 
   const {token, user} = useContext(UserContext)
-  const getGame = async () => {
-    
+  
+  const getGame = async () => { 
     try {
       const data = await gamesService.getGameById(id);
       (data) ? setGame(data) : toast.error("Juego no encontrado");
@@ -53,11 +53,6 @@ export const GameDetail = () => {
     getRatings()
   }, [id])
 
-
-  
-
-  console.log(ratings)
-  
   return (
     <Container>
       <Toaster position="top-right" reverseOrder={true} />

@@ -11,9 +11,9 @@ const AdminLayout = () => {
   return (
     <div className='grid-container'>
       <TopBar />
-      <Container>
+      <Container className='d-flex'>
         <LateralBar/>
-      <Outlet />
+        <Outlet />
       </Container>
       <Footer />
     </div>

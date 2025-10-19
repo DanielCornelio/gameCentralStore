@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SectionTitle } from "../../components";
 import { Container, Row, Col, Stack, Button, Table } from "react-bootstrap";
 import { ProductModal } from "../../components";
+import gamesService from "../../api/games";
+import { UserContext } from "../../contexts/UserContext";
+import { client } from "../../api/constans";
+import toast from "react-hot-toast";
 
 export const Products = () => {
   const [productos, setProductos] = useState([]);
   const [productoEditando, setProductoEditando] = useState(null);
 
-  const handleAddProduct = (nuevoProducto) => {
-    const id =
-      productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
-    setProductos((prev) => [...prev, { ...nuevoProducto, id }]);
-  };
+  const {user, token} = useContext(UserContext);
+  console.log(user)
+
+  const [games, setGames] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const getGames = async () => {
+    try {
+      const data = await gamesService.getAllGames();
+      setGames(data)
+    } catch (error) {
+      toast.error('No se pudo establecer conexión con el servidor')
+    }
+  }
+
+  const handleCommentAdded = () =>{
+    getGames();
+    setShowModal(false);
+  }
+
+  useEffect(() => {
+    getGames();
+  }, [])
 
   // Editar producto
   const handleUpdateProduct = (productoActualizado) => {
@@ -24,39 +46,50 @@ export const Products = () => {
   };
 
   // Eliminar producto
-  const handleDeleteProduct = (id) => {
-    if (window.confirm("¿Seguro que deseas eliminar este producto?")) {
-      setProductos((prev) => prev.filter((prod) => prod.id !== id));
+  const handleDeleteProduct = async(id) => {
+    try {
+      const response = await gamesService.deleteGame(id)
+      toast.success(response.data.message)
+      handleCommentAdded()
+    } catch (error) {
+        toast.error("Error al eliminar el juego")
+
     }
   };
+
+  
 
   return (
     <Container>
       <SectionTitle title="Productos" />
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <ProductModal onSave={handleAddProduct} />
+      <div className="d-flex justify-content-start align-items-center mb-4">
+       {
+        token && user?.rol == "admin" && (
+          <Button variant="primary" onClick={() => setShowModal(true)}>Agregar producto</Button>
+        )
+       }
       </div>
 
-      <Table striped borderless hover variant="dark">
+      <Table striped borderless hover variant="dark" size="sm">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Stock</th>
-            <th>Precio</th>
-            <th>Plataforma</th>
-            <th>Género</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th className="text-center">ID</th>
+            <th className="text-center">Título</th>
+            <th className="text-center">Stock</th>
+            <th className="text-center">Precio</th>
+            <th className="text-center">Plataforma</th>
+            <th className="text-center">Género</th>
+            <th className="text-center">Estado</th>
+            <th className="text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {productos.map((prod) => (
+          {games.map((prod, index) => (
             <tr key={prod.id}>
-              <td>{prod.id}</td>
-              <td>{prod.titulo}</td>
-              <td>{prod.stock}</td>
-              <td>${prod.precio}</td>
+              <td className="text-center">{index+1}</td>
+              <td className="text-text-truncate">{prod.titulo}</td>
+              <td className="text-center">{prod.stock}</td>
+              <td className="text-center">${prod.precio}</td>
               <td>{prod.plataforma}</td>
               <td>{prod.genero}</td>
               <td>
@@ -90,10 +123,18 @@ export const Products = () => {
         </tbody>
       </Table>
 
+      <ProductModal
+          showModal={showModal} 
+          setShowModal={setShowModal} 
+          user={user}
+          onCommentAdded={handleCommentAdded} />
+
       {productoEditando && (
         <ProductModal
           onUpdate={handleUpdateProduct}
           productEdit={productoEditando}
+          user={user}
+          onCommentAdded={handleCommentAdded}
         />
       )}
     </Container>
