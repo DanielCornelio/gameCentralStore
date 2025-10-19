@@ -11,8 +11,8 @@ export const Products = () => {
   const [productos, setProductos] = useState([]);
   const [productoEditando, setProductoEditando] = useState(null);
 
-  const {user, token} = useContext(UserContext);
-  console.log(user)
+  const { user, token } = useContext(UserContext);
+  console.log(user);
 
   const [games, setGames] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -20,20 +20,20 @@ export const Products = () => {
   const getGames = async () => {
     try {
       const data = await gamesService.getAllGames();
-      setGames(data)
+      setGames(data);
     } catch (error) {
-      toast.error('No se pudo establecer conexión con el servidor')
+      toast.error("No se pudo establecer conexión con el servidor");
     }
-  }
+  };
 
-  const handleCommentAdded = () =>{
+  const handleCommentAdded = () => {
     getGames();
     setShowModal(false);
-  }
+  };
 
   useEffect(() => {
     getGames();
-  }, [])
+  }, []);
 
   // Editar producto
   const handleUpdateProduct = (productoActualizado) => {
@@ -46,29 +46,31 @@ export const Products = () => {
   };
 
   // Eliminar producto
-  const handleDeleteProduct = async(id) => {
+  const handleDeleteProduct = async (id) => {
     try {
-      const response = await gamesService.deleteGame(id)
-      toast.success(response.data.message)
-      handleCommentAdded()
+      const response = await gamesService.deleteGame(id);
+      toast.success(response.data.message);
+      handleCommentAdded();
     } catch (error) {
-        toast.error("Error al eliminar el juego")
-
+      toast.error("Error al eliminar el juego");
     }
   };
 
-  
-
   return (
     <Container>
-      <SectionTitle title="Productos" />
-      <div className="d-flex justify-content-start align-items-center mb-4">
-       {
-        token && user?.rol == "admin" && (
-          <Button variant="primary" onClick={() => setShowModal(true)}>Agregar producto</Button>
-        )
-       }
-      </div>
+      <Stack
+        direction="horizontal"
+        className="align-items-center justify-content-between"
+      >
+        <SectionTitle title="Productos" />
+        <div className="d-flex justify-content-start align-items-center ">
+          {token && user?.rol == "admin" && (
+            <Button variant="primary" onClick={() => setShowModal(true)}>
+              Agregar producto
+            </Button>
+          )}
+        </div>
+      </Stack>
 
       <Table striped borderless hover variant="dark" size="sm">
         <thead>
@@ -86,7 +88,7 @@ export const Products = () => {
         <tbody>
           {games.map((prod, index) => (
             <tr key={prod.id}>
-              <td className="text-center">{index+1}</td>
+              <td className="text-center">{index + 1}</td>
               <td className="text-text-truncate">{prod.titulo}</td>
               <td className="text-center">{prod.stock}</td>
               <td className="text-center">${prod.precio}</td>
@@ -124,10 +126,11 @@ export const Products = () => {
       </Table>
 
       <ProductModal
-          showModal={showModal} 
-          setShowModal={setShowModal} 
-          user={user}
-          onCommentAdded={handleCommentAdded} />
+        showModal={showModal}
+        setShowModal={setShowModal}
+        user={user}
+        onCommentAdded={handleCommentAdded}
+      />
 
       {productoEditando && (
         <ProductModal

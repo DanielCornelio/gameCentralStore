@@ -46,6 +46,14 @@ const gamesService = {
         } catch (error) {
             return { data: null, status: error.response.status, error: true, message: error.response.data.message };
         }
+    },
+    updateGame: async(id, gameData) => {
+        try {
+            const response = await client.put(`/juegos/${id}`, gameData);
+            return { data: response.data, status: response.status, error: false, message: "Se ha actualizado el juego" };
+        } catch (error) {
+            return { data: null, status: error.response.status, error: true, message: error.response.data.message };
+        }
     }
 }
 
