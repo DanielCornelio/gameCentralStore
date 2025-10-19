@@ -14,6 +14,7 @@ const gamesService = {
             price: parseFloat(game.precio),
             image: game.portada_url,
             stock: game.stock,
+            active: game.activo,
             
             // Propiedades en español para GameCard (mantener compatibilidad)
             portada_url: game.portada_url,
@@ -22,10 +23,88 @@ const gamesService = {
             plataforma: game.plataforma,
             precio: parseFloat(game.precio),
             descripcion: game.descripcion,
-            stock: game.stock
+            stock: game.stock,
+            activo: game.activo
         }));
         
         return games;
+    },
+     getGamesPaginated: async (page = 1, limit = 10) => {
+        try {
+            const response = await client.get('/juegos', {
+                params: {
+                    page: page,
+                    limit: limit
+                }
+            });
+            
+            // Si tu backend ya devuelve datos paginados
+            if (response.data.pagination) {
+                const games = response.data.results.map(game => ({
+                    id: game.id,
+                    title: game.titulo,
+                    genre: game.genero,
+                    platform: game.plataforma,
+                    price: parseFloat(game.precio),
+                    image: game.portada_url,
+                    stock: game.stock,
+                    active: game.activo,
+                    portada_url: game.portada_url,
+                    titulo: game.titulo,
+                    genero: game.genero,
+                    plataforma: game.plataforma,
+                    precio: parseFloat(game.precio),
+                    descripcion: game.descripcion,
+                    stock: game.stock,
+                    activo: game.activo
+                }));
+                
+                return {
+                    games: games,
+                    total: response.data.pagination.total,
+                    totalPages: response.data.pagination.totalPages,
+                    currentPage: response.data.pagination.currentPage
+                };
+            } else {
+                // Si el backend no tiene paginación, hacer paginación manual
+                const allGames = response.data.results.map(game => ({
+                    id: game.id,
+                    title: game.titulo,
+                    genre: game.genero,
+                    platform: game.plataforma,
+                    price: parseFloat(game.precio),
+                    image: game.portada_url,
+                    stock: game.stock,
+                    active: game.activo,
+                    portada_url: game.portada_url,
+                    titulo: game.titulo,
+                    genero: game.genero,
+                    plataforma: game.plataforma,
+                    precio: parseFloat(game.precio),
+                    descripcion: game.descripcion,
+                    stock: game.stock,
+                    activo: game.activo
+                }));
+                
+                const startIndex = (page - 1) * limit;
+                const endIndex = startIndex + limit;
+                const paginatedGames = allGames.slice(startIndex, endIndex);
+                
+                return {
+                    games: paginatedGames,
+                    total: allGames.length,
+                    totalPages: Math.ceil(allGames.length / limit),
+                    currentPage: page
+                };
+            }
+        } catch (error) {
+            return { 
+                data: null, 
+                status: error.response?.status, 
+                error: true, 
+                message: error.response?.data?.message || "Error al obtener juegos" 
+            };
+        }
     },
     getGameById: async (id) => {
         const response = await client.get(`/juegos/${id}`);

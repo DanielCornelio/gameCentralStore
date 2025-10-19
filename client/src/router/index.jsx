@@ -4,9 +4,12 @@ import { Games } from "../pages/web/Games";
 import { Profile } from "../pages/web/Profile";
 import { WebLayout } from "../layouts/web/WebLayout";
 import { Login2, Register2, GameDetail, Cart, Favorites } from "../pages/web";
-import { ProtectedRoute } from "../components";
+import { ManagePassword , ProtectedRoute } from "../components";
 import AdminLayout from "../layouts/admin/AdminLayout";
 import { Products } from "../pages/admin/Products";
+import { Password } from "../pages/admin/Password";
+
+
 
 const routes = createBrowserRouter([
   {
@@ -59,6 +62,24 @@ const routes = createBrowserRouter([
         path: "/admin/products",
         element: (
           <ProtectedRoute><Products/></ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/info",
+        element: (
+          <ProtectedRoute><Profile/></ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/security",
+        element: (
+          <ProtectedRoute><Password/></ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/settings",
+        element: (
+          <ProtectedRoute></ProtectedRoute>
         ),
       }
     ]
