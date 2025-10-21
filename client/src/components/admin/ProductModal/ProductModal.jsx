@@ -164,8 +164,10 @@ export const ProductModal = ({ showModal, setShowModal, onCommentAdded, productE
                         placeholder=""
                         {...register("stock", {
                           required: "El stock es requerido",
-                          
-                          min:2
+                          min:{
+                            value:1,
+                            message: "El valor debe ser mayor a 1"
+                          }
                         })}
                       />
                     </FloatingLabel>
@@ -182,7 +184,10 @@ export const ProductModal = ({ showModal, setShowModal, onCommentAdded, productE
                         placeholder=""
                         {...register("precio", {
                           required: "El precio es requerido",
-                          valueAsNumber: true,
+                          min:{
+                            value:1,
+                            message: "El valor debe ser mayor a 1"
+                          }
                         })}
                       />
                     </FloatingLabel>
