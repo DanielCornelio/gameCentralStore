@@ -32,7 +32,7 @@ export const Login2 = () => {
   const onSubmit = handleSubmit(async (credenciales) => {
     try {
       const response = await login(credenciales);
-      console.log(response.data.token)
+   
       if (response.data.token) {
         toast.success('Login exitoso');
         navigate('/');  
@@ -50,7 +50,7 @@ export const Login2 = () => {
 
   return (
     <Container className="login d-flex justify-content-center align-items-center">
-      <Toaster position="top-right" reverseOrder={false} />
+      
       <Col sm={12} md={5}>
         <h2 className="text-center mb-5">Inicia Sesión</h2>
 

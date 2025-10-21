@@ -7,7 +7,7 @@ import ratingsService from "../../../api/ratings";
 import toast from "react-hot-toast";
 
 
-export const CommentModal = ({ showModal, setShowModal, usuario_id, juego_id, onCommentAdded }) => {
+export const CommentModal = ({ showModal, setShowModal, usuario_id, titulo, juego_id, onCommentAdded }) => {
   
   const handleCloseModal = () => {
     reset();
@@ -35,7 +35,7 @@ export const CommentModal = ({ showModal, setShowModal, usuario_id, juego_id, on
     <>
       <Modal size="lg" show={showModal} backdrop="static" keyboard={false}>
         <Modal.Header className="d-flex justify-content-between align-items-center border-0">
-          <Modal.Title>¿Qué te pareció Resident Evil 0?</Modal.Title>
+          <Modal.Title>¿Qué te pareció {titulo}?</Modal.Title>
           <GrClose size={20} className="btn-close" onClick={handleCloseModal} />
         </Modal.Header>
         <Modal.Body>
