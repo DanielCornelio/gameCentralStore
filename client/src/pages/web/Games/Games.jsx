@@ -1,38 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { Toaster, toast } from 'react-hot-toast';
-import { genres, platforms } from '../../../data/games';
-import { useGameFilters } from '../../../hooks/useGameFilters';
-import { SearchAndFilters, GameCard } from '../../../components/web';
-import gamesService from '../../../api/games';
-import './Games.scss';
-import { SectionTitle } from '../../../components';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Form, FloatingLabel, Button } from "react-bootstrap";
+import { Toaster, toast } from "react-hot-toast";
+import { genres, platforms } from "../../../data/games";
+import { useGameFilters } from "../../../hooks/useGameFilters";
+import { SearchAndFilters, GameCard } from "../../../components/web";
+import gamesService from "../../../api/games";
+import "./Games.scss";
+import { SectionTitle } from "../../../components";
+import { useForm } from "react-hook-form";
 
 export const Games = () => {
-  const [gamesData, setGamesData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [games, setGames] = useState([]);
 
   const {
-    searchTerm,
-    setSearchTerm,
-    filters,
-    updateFilter,
-    sortBy,
-    setSortBy,
-    filteredGames,
-  } = useGameFilters(gamesData);
+    register,
+    handleSubmit
+  } = useForm();
 
   // Función para obtener los juegos desde la API (como en home.jsx)
   const getGames = async () => {
     try {
-      setLoading(true);
-      const data = await gamesService.getAllGames();
-      setGamesData(data);
+      const data = await gamesService.getGamesFilters();
+      setGames(data.games);
     } catch (error) {
-      toast.error("Error al cargar los juegos");
-      console.error("Error:", error);
-    } finally {
-      setLoading(false);
+      toast.error("Error al cargar los juegos", error);
     }
   };
 
@@ -41,48 +32,85 @@ export const Games = () => {
     getGames();
   }, []);
 
+  const onSubmit = handleSubmit(async(data) => {
+    try {
+      const response = await gamesService.getGamesFilters(data)
+      setGames(response.games)
+    } catch (error) {
+      console.log(error)
+    }
+  })
+
   return (
     <Container className="games-page">
       <Toaster position="top-right" reverseOrder={true} />
-      
+
       <SectionTitle title="Store" />
-      
-      <SearchAndFilters
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        filters={filters}
-        updateFilter={updateFilter}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        genres={genres}
-        platforms={platforms}
-      />
 
-      {/* Manejo del estado de carga */}
-      {loading && (
-        <Row>
+      <Row className="mb-5">
+        <Form onSubmit={onSubmit}>
+          <div className="mb-4">
+            <FloatingLabel label="Titulo">
+              <Form.Control
+                type="text"
+                placeholder=""
+                {...register("titulo")}
+              />
+            </FloatingLabel>
+          </div>
+          <div className="d-flex gap-4">
           <Col>
-            <p className="text-center">Cargando juegos...</p>
+            <FloatingLabel label="Plataforma">
+              <Form.Select {...register("plataforma")}>
+                <option value="">Selecciona una opción</option>
+                <option value="PC">PC</option>
+                <option value="PlayStation">PlayStation</option>
+                <option value="Xbox">Xbox</option>
+                <option value="Nintendo">Nintendo</option>
+              </Form.Select>
+            </FloatingLabel>
           </Col>
-        </Row>
-      )}
+          <Col>
+            <FloatingLabel label="Genero">
+              <Form.Select {...register("genero")}>
+                <option value="">Selecciona una opción</option>
+                <option value="accion">Acción</option>
+                <option value="aventura">Aventura</option>
+                <option value="rpg">RPG</option>
+                <option value="estrategia">Estrategia</option>
+                <option value="deportes">Deportes</option>
+                <option value="shooter">Shooter</option>
+                <option value="horror">Horror</option>
+              </Form.Select>
+            </FloatingLabel>
+          </Col>
+          <Col>
+            <FloatingLabel label="Ordenar">
+              <Form.Select {...register("order_by")}>
+                <option value="">Selecciona una opción</option>
+                <option value="precio_ASC">Menor Precio</option>
+                <option value="precio_DESC">Mayor Precio</option>
+              </Form.Select>
+            </FloatingLabel>
+          </Col>
+          <Col><Button type="submit">Filtrar</Button></Col>
+          </div>
+        </Form>
+      </Row>
 
-      {/* Renderizado de juegos con filtros aplicados */}
-      {!loading && (
-        <Row>
-          {filteredGames.length > 0 ? (
-            filteredGames.map((game) => (
-              <Col key={game.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
-                <GameCard game={game} />
-              </Col>
-            ))
-          ) : (
-            <Col>
-              <p>No se encontraron juegos con esos criterios.</p>
+      <Row>
+        {games?.length > 0 ? (
+          games?.map((game) => (
+            <Col key={game.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
+              <GameCard {...game} />
             </Col>
-          )}
-        </Row>
-      )}
+          ))
+        ) : (
+          <Col>
+            <p>No se encontraron juegos con esos criterios.</p>
+          </Col>
+        )}
+      </Row>
     </Container>
   );
 };

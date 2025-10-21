@@ -86,7 +86,7 @@ const handleLike = async () => {
       </div>
       <div className="game-info">
         <h3 className="game-title text-truncate">{titulo}</h3>
-        <p className="game-genre"><Chip title={genero} /></p>
+        <p className="game-genre"><Chip title={genero.toUpperCase()} /></p>
         <p className="game-platform">{plataforma}</p>
         <div className="game-price">${precio}</div>
       </div>

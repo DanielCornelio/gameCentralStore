@@ -34,9 +34,7 @@ export const Login2 = () => {
       const response = await login(credenciales);
       console.log(response.data.token)
       if (response.data.token) {
-        toast.success('Login exitoso', {
-          duration: 1000
-        });
+        toast.success('Login exitoso');
         navigate('/');  
       }
     } catch (error) {

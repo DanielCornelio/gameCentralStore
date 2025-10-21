@@ -9,17 +9,20 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser, FaSignInAlt } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./TopBar.scss";
 import { UserContext } from "../../../contexts/UserContext";
 import { IoHeartSharp } from "react-icons/io5";
+import { CartContext } from "../../../contexts/CartContext";
 
 export const TopBar = ({ cartCount = 0 }) => {
   const { user, token, logout } = useContext(UserContext);
+  const {cart} = useContext(CartContext)
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     logout();
+    navigate("/")
   };
 
   return (
@@ -38,14 +41,8 @@ export const TopBar = ({ cartCount = 0 }) => {
             <Nav.Link as={NavLink} to="/" end>
               Inicio
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/offers">
-              Ofertas
-            </Nav.Link>
             <Nav.Link as={NavLink} to="/games">
-              Juegos
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/products">
-              Registrar juegos
+              Store
             </Nav.Link>
           </Nav>
 
@@ -59,7 +56,7 @@ export const TopBar = ({ cartCount = 0 }) => {
               id="navbarScrollingDropdown"
             >
               <NavDropdown.Item as={NavLink} to="/profile">Mi perfil</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/admin/settings">Configuración</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/admin/profile">Administrar Cuenta</NavDropdown.Item>
 
               {
                 user?.rol == "admin" && (
@@ -80,7 +77,7 @@ export const TopBar = ({ cartCount = 0 }) => {
 
           <Nav.Link as={NavLink} to="/cart" className="position-relative">
             <FaShoppingCart size={20} />
-            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
           </Nav.Link>
 
           <Nav className="d-flex align-items-center gap-2 ms-4">

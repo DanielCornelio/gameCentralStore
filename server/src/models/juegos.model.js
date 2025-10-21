@@ -54,6 +54,9 @@ export const findGamesModel = async ({
   }
 
   // Ordenamiento
+  if(!order_by){
+    order_by= 'precio_ASC'
+  }
   const [attribute, direction] = order_by.split('_');
   querySQL += ` ORDER BY ${attribute} ${direction}`;
 
@@ -84,10 +87,10 @@ export const createGameModel = async ({titulo, descripcion, precio, precio_descu
     return nuevoJuego;
 } 
 
- export const updateGameModel = async ( {titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero, stock, plataforma, edad_minima, id} ) => {
+ export const updateGameModel = async ( {titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero, stock, plataforma, edad_minima, activo, id} ) => {
     const querySQL = {
-        text: 'UPDATE juegos SET titulo=$1, descripcion=$2, precio=$3, precio_descuento=$4, desarrollador=$5, fecha_lanzamiento=$6, portada_url=$7, genero=$8, stock=$9, plataforma=$10, edad_minima=$11 WHERE id=$12 RETURNING *',
-        values: [titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima, id]
+        text: 'UPDATE juegos SET titulo=$1, descripcion=$2, precio=$3, precio_descuento=$4, desarrollador=$5, fecha_lanzamiento=$6, portada_url=$7, genero=$8, stock=$9, plataforma=$10, edad_minima=$11, activo=$12 WHERE id=$13 RETURNING *',
+        values: [titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima, activo, id]
     }
 
     const { rows: juegoActualizado} = await pool.query(querySQL)

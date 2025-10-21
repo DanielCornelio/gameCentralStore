@@ -1,8 +1,8 @@
 import { client } from "./constans"
 
 const gamesService = {
-    getAllGames: async () => {
-        const response = await client.get('/juegos');
+    getAllGames: async (data) => {
+        const response = await client.get('/juegos', {params:data});
         
         // Transformar los datos del backend (español) al formato que espera useGameFilters (inglés)
         const games = response.data.results.map(game => ({
@@ -29,83 +29,103 @@ const gamesService = {
         
         return games;
     },
-     getGamesPaginated: async (page = 1, limit = 10) => {
-        try {
-            const response = await client.get('/juegos', {
-                params: {
-                    page: page,
-                    limit: limit
-                }
-            });
-            
-            // Si tu backend ya devuelve datos paginados
-            if (response.data.pagination) {
-                const games = response.data.results.map(game => ({
-                    id: game.id,
-                    title: game.titulo,
-                    genre: game.genero,
-                    platform: game.plataforma,
-                    price: parseFloat(game.precio),
-                    image: game.portada_url,
-                    stock: game.stock,
-                    active: game.activo,
-                    portada_url: game.portada_url,
-                    titulo: game.titulo,
-                    genero: game.genero,
-                    plataforma: game.plataforma,
-                    precio: parseFloat(game.precio),
-                    descripcion: game.descripcion,
-                    stock: game.stock,
-                    activo: game.activo
-                }));
-                
-                return {
-                    games: games,
-                    total: response.data.pagination.total,
-                    totalPages: response.data.pagination.totalPages,
-                    currentPage: response.data.pagination.currentPage
-                };
-            } else {
-                // Si el backend no tiene paginación, hacer paginación manual
-                const allGames = response.data.results.map(game => ({
-                    id: game.id,
-                    title: game.titulo,
-                    genre: game.genero,
-                    platform: game.plataforma,
-                    price: parseFloat(game.precio),
-                    image: game.portada_url,
-                    stock: game.stock,
-                    active: game.activo,
-                    portada_url: game.portada_url,
-                    titulo: game.titulo,
-                    genero: game.genero,
-                    plataforma: game.plataforma,
-                    precio: parseFloat(game.precio),
-                    descripcion: game.descripcion,
-                    stock: game.stock,
-                    activo: game.activo
-                }));
-                
-                const startIndex = (page - 1) * limit;
-                const endIndex = startIndex + limit;
-                const paginatedGames = allGames.slice(startIndex, endIndex);
-                
-                return {
-                    games: paginatedGames,
-                    total: allGames.length,
-                    totalPages: Math.ceil(allGames.length / limit),
-                    currentPage: page
-                };
+     getGamesFilters: async (params = {}) => {
+    try {
+        const { 
+            limit = 10, 
+            order_by, 
+            page = 1, 
+            titulo, 
+            genero, 
+            plataforma 
+        } = params;
+
+        const response = await client.get('/juegos', {
+            params: {
+                limit, 
+                order_by, 
+                page, 
+                titulo, 
+                genero, 
+                plataforma
             }
-        } catch (error) {
-            return { 
-                data: null, 
-                status: error.response?.status, 
-                error: true, 
-                message: error.response?.data?.message || "Error al obtener juegos" 
+        });
+        
+        // Limpiar parámetros undefined
+        Object.keys(response.config.params).forEach(key => {
+            if (response.config.params[key] === undefined) {
+                delete response.config.params[key];
+            }
+        });
+
+        // Si tu backend ya devuelve datos paginados
+        if (response.data.pagination) {
+            const games = response.data.results.map(game => ({
+                id: game.id,
+                title: game.titulo,
+                genre: game.genero,
+                platform: game.plataforma,
+                price: parseFloat(game.precio),
+                image: game.portada_url,
+                stock: game.stock,
+                active: game.activo,
+                portada_url: game.portada_url,
+                titulo: game.titulo,
+                genero: game.genero,
+                plataforma: game.plataforma,
+                precio: parseFloat(game.precio),
+                descripcion: game.descripcion,
+                stock: game.stock,
+                activo: game.activo
+            }));
+            
+            return {
+                games: games,
+                total: response.data.pagination.total,
+                totalPages: response.data.pagination.totalPages,
+                currentPage: response.data.pagination.currentPage
+            };
+        } else {
+            // Si el backend no tiene paginación, hacer paginación manual
+            const allGames = response.data.results.map(game => ({
+                id: game.id,
+                title: game.titulo,
+                genre: game.genero,
+                platform: game.plataforma,
+                price: parseFloat(game.precio),
+                image: game.portada_url,
+                stock: game.stock,
+                active: game.activo,
+                portada_url: game.portada_url,
+                titulo: game.titulo,
+                genero: game.genero,
+                plataforma: game.plataforma,
+                precio: parseFloat(game.precio),
+                descripcion: game.descripcion,
+                stock: game.stock,
+                activo: game.activo
+            }));
+            
+            const startIndex = (page - 1) * limit;
+            const endIndex = startIndex + limit;
+            const paginatedGames = allGames.slice(startIndex, endIndex);
+            
+            return {
+                games: paginatedGames,
+                total: allGames.length,
+                totalPages: Math.ceil(allGames.length / limit),
+                currentPage: page
             };
         }
-    },
+    } catch (error) {
+        return { 
+            data: null, 
+            status: error.response?.status, 
+            error: true, 
+            message: error.response?.data?.message || "Error al obtener juegos" 
+        };
+    }
+},
     getGameById: async (id) => {
         const response = await client.get(`/juegos/${id}`);
         return response.data.result[0];

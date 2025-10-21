@@ -109,7 +109,7 @@ export const Products = () => {
               <td className="text-center">{prod.stock}</td>
               <td className="text-center">${prod.precio}</td>
               <td>{prod.plataforma}</td>
-              <td>{prod.genero}</td>
+              <td>{prod.genero.toUpperCase()}</td>
               <td>
                 <span
                   className={`badge ${

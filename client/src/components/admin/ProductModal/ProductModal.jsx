@@ -229,13 +229,13 @@ export const ProductModal = ({ showModal, setShowModal, onCommentAdded, productE
                         })}
                       >
                         <option>Selecciona una opción</option>
-                        <option value="Acción">Acción</option>
-                        <option value="Aventura">Aventura</option>
-                        <option value="RPG">RPG</option>
-                        <option value="Estrategia">Estrategia</option>
-                        <option value="Deportes">Deportes</option>
-                        <option value="Shooter">Shooter</option>
-                        <option value="Shooter">Horror</option>
+                        <option value="accion">Acción</option>
+                        <option value="aventura">Aventura</option>
+                        <option value="rpg">RPG</option>
+                        <option value="estrategia">Estrategia</option>
+                        <option value="deportes">Deportes</option>
+                        <option value="shooter">Shooter</option>
+                        <option value="horror">Horror</option>
                       </Form.Select>
                     </FloatingLabel>
                     {errors.genero && (

@@ -1,11 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
 import authService from "../api/auth";
 import usuariosService from "../api/usuarios";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(
     localStorage.getItem("token") ? localStorage.getItem("token") : null
@@ -27,6 +27,7 @@ const UserProvider = ({ children }) => {
   
 
   const login = async (credentials) => {
+
     try {
       const response = await authService.login(credentials);
       if (response.data.token) {

@@ -6,10 +6,12 @@ import { useForm } from "react-hook-form";
 import "./Register.scss";
 import authService from "../../../api/auth";
 import toast from "react-hot-toast";
+import { TermsModal } from "../../../components";
 
 export const Register2 = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate();
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -21,6 +23,11 @@ export const Register2 = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+
+  const handleTermsClick = (e) =>{
+    e.preventDefault()
+    setShowModal(true)
+  }
 
   const onSubmit = handleSubmit( async (data) => {
     try {
@@ -194,7 +201,7 @@ export const Register2 = () => {
                 label={
                   <span>
                     Acepto los{" "}
-                    <Link to="/terms" className="btn-link">
+                    <Link className="btn-link" onClick={()=>{setShowModal(true)}}>
                       términos y condiciones
                     </Link>
                   </span>
@@ -217,6 +224,7 @@ export const Register2 = () => {
           </Stack>
         </Form>
       </Col>
+      <TermsModal showModal={showModal} setShowModal={setShowModal} />
     </Container>
   );
 };

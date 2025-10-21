@@ -5,9 +5,8 @@ import { FaTrash } from "react-icons/fa";
 import { Chip } from '../Chip';
 
 
-export const CartCard = ({ id, titulo, portada_url, plataforma, genero, precio, count, incrementar, disminuir }) => {
+export const CartCard = ({ id, titulo, portada_url, plataforma, genero, precio, count, eliminarCart }) => {
     console.log(genero)
-    const total = precio * count
     return (
 
                 <Card className='cart__card d-flex flex-row'>
@@ -21,27 +20,16 @@ export const CartCard = ({ id, titulo, portada_url, plataforma, genero, precio, 
 
                     <Stack>
 
-                        <Stack direction='horizontal' className='mb-3 align-items-center justify-content-between'>
-                            <h2 className='me-auto'>{titulo}</h2>
-                            <InputGroup className="gap-2 align-items-center">
-                                <Button variant="outline-secondary" onClick={() => disminuir(id)} >-</Button>
-                                <span>{count}</span>
-                                <Button variant="outline-secondary" onClick={() => incrementar(id)}>+</Button>
-                            </InputGroup>
+                        <Stack direction='horizontal' className=' align-items-center justify-content-between'>
+                            <h3 className='me-auto text-truncate w-75'>{titulo}</h3>
+                            <Button className='d-flex align-items-center gap-2' onClick={() => eliminarCart(id)}><FaTrash /> Eliminar</Button>
                         </Stack>
 
-
                         <Stack gap={3} >
-                            <Chip titulo={genero}/>
-
-                            <div>
-                                
-                                <Chip titulo={genero} />
+                            <div> 
+                                <Chip title={genero.toUpperCase()} />
                             </div>
-                            <h4 className='m-0'>{precio}</h4>
-                            <Stack direction='horizontal'>
-                                <h2 className='m-0'>{total.toLocaleString("es-MX")}</h2>
-                            </Stack>
+                            <h2 className='m-0'>$ {precio.toLocaleString("es-MX")}</h2>
 
                         </Stack>
                     </Stack>
