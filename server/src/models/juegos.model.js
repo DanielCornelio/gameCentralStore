@@ -9,7 +9,7 @@ export const getGamesModel = async () =>{
 
 
 export const findGamesModel = async ({
-  limit, 
+  limit = 12, 
   order_by = 'precio_ASC', 
   page = 1, 
   titulo, 
