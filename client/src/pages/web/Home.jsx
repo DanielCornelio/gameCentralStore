@@ -28,7 +28,7 @@ export const Home = () => {
 
   return (
     <Container>
-      <Toaster position="top-right" reverseOrder={true} />
+      <Toaster position="bottom-left" reverseOrder={false} />
       <Row>
         <Col xs={12}>
           <Carrousel />

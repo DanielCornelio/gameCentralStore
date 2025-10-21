@@ -46,7 +46,6 @@ export const GameDetailCard = ({ portada_url, titulo, genero,fecha_lanzamiento, 
           <div>
             <h5>Plataformas disponibles</h5>
             {plataforma}
-            <p>Desarrollador: {desarrollador}</p>
           </div>
           <div className="">
             <Stack>
