@@ -1,0 +1,27 @@
+@use '../../../styles/colors' as *;
+
+.lateralbar{
+    background-color: $background-gray;
+    height: calc(100vh - 62px - 481px);
+    position: absolute;
+    top: calc(62px + 40px);
+    padding: 10px;
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.nav-link {
+    color: $text-light !important;
+    font-weight: 500;
+
+    &.active {
+      color: $secondary-hover !important;
+      // font-weight: bold;
+    }
+
+    &:hover {
+      color: $secondary-hover !important;
+      transition: color 0.3s ease;
+    }
+  }

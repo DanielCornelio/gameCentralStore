@@ -1,0 +1,47 @@
+@use '../../../styles/colors' as *;
+
+.text-purple{
+  color: $secondary-hover;
+}
+.text-gray{
+  color:$text-gray;
+}
+.profile-page {
+  .profile-info {
+    text-align: center;
+    margin-bottom: 2rem;
+    
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 3px solid #e3e6f0;
+    }
+    
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+    
+    .profile-email {
+      color: #6c757d;
+      font-size: 1.1rem;
+    }
+  }
+  
+  .purchases-section {
+    margin-top: 2rem;
+    
+    .purchase-item {
+      border-bottom: 1px solid #e9ecef;
+      padding: 1rem 0;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

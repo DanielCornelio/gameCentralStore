@@ -6,7 +6,7 @@ import { FaWindows } from "react-icons/fa";
 import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 
 
-export const GameDetailCard = () => {
+export const GameDetailCard = ({ portada_url, titulo, genero,fecha_lanzamiento, descripcion, plataforma, precio, desarrollador}) => {
   const [like, setLike] = useState(false);
 
   const handleLike = () => {
@@ -20,7 +20,7 @@ export const GameDetailCard = () => {
           <Row>
             <Col md={3}>
               <Image
-                src="./src/assets/img/resident-evi-0.jpg"
+                src={portada_url}
                 className="w-100"
                 rounded
               />
@@ -28,46 +28,30 @@ export const GameDetailCard = () => {
             <Col>
               <Stack gap={3}>
                 <Stack direction="horizontal" className="justify-content-between align-content-center">
-                  <h3 className="m-0">Resident Evil 0</h3>
+                  <h3 className="m-0">{titulo}</h3>
                   <i onClick={handleLike}>{like ? <IoHeartSharp size={30} className="heart-outline" /> : <IoHeartOutline size={30} className="heart-outline" />}</i>
                 </Stack>
-                <Stack direction="vertical">
-                  <p className="fw-bold">
-                    Género:
-                  </p>
-                  <div>
-                    <Chip title="Terror" />
-                  </div>
+                <Stack direction="vertical" gap={3}>
+                  <span><Chip title={genero} /></span>
+                  <p className="mb-0"><span className="fw-bold">Fecha de lanzamiento:</span> {new Date(fecha_lanzamiento).toLocaleDateString()}</p>
+                  <p className="mb-0">{descripcion}</p>
                 </Stack>
-                <Stack direction="vertical">
-                  <p className="fw-bold">Fecha de lanzamiento:</p>
-                  <p>01/01/1970</p>
-                </Stack>
-                <p>
-                  Resident Evil 0 revela el misterio que se oculta tras el incidente
-                  en la mansión, evento que pone en marcha todos los sucesos de la
-                  serie de Resident Evil. Esta versión remasterizada presenta la
-                  historia y el juego originales con gráficos asombrosos de calidad
-                  HD, sonido envolvente de 5.1 canales, controles opcionales
-                  modernizados y compatibilidad con TV de pantalla ancha. Prepárate
-                  para descubrir los terribles secretos que se ocultan en el origen
-                  del mal.
-                </p>
               </Stack>
             </Col>
           </Row>
         </Card>
       </Col>
       <Col>
-        <Stack className="box">
+        <Stack className="box pt-3 ">
           <div>
-            <p>Plataformas disponibles</p>
-            <FaWindows size={25} />
+            <h5>Plataformas disponibles</h5>
+            {plataforma}
+            <p>Desarrollador: {desarrollador}</p>
           </div>
           <div className="">
             <Stack>
               <p>Precio</p>
-              <h2>$ 850.00 MXN</h2>
+              <h2>$ {precio}</h2>
             </Stack>
             <Stack className="d-grid" gap={3}>
               <Button size="lg">

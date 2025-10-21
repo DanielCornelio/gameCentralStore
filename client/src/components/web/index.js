@@ -1,4 +1,12 @@
-export * from './TermsModal';
-export * from './GameDetailCard';
-export * from './Chip';
-export * from './RatingComments';
+export { SearchAndFilters } from './SearchAndFilters';
+export { GameCard } from './GameCard';
+export { Chip } from './Chip';
+export { CartEmpty } from './CartEmpty';
+export { CommentModal } from './CommentModal';
+export { GameDetailCard } from './GameDetailCard';
+export { LastGameCard } from './LastGameCard';
+export { PremierGameCard } from './PremiereGameCard';
+export { RatingComments } from './RatingComments';
+export { TermsModal } from './TermsModal';
+export { CartCard } from './CartCard';
+export {FavoriteGameCard} from './FavoriteGameCard';

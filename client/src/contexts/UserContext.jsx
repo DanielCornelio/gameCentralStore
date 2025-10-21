@@ -1,0 +1,70 @@
+import React, { createContext, useEffect, useState } from "react";
+import authService from "../api/auth";
+import usuariosService from "../api/usuarios";
+import { useNavigate } from "react-router-dom";
+
+export const UserContext = createContext();
+
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(
+    localStorage.getItem("token") ? localStorage.getItem("token") : null
+  );
+
+  const checkauth = async() => {
+    if(token){
+      const response = await usuariosService.me()
+      if(response.error || response.status != 200 ){
+        logout()
+        return
+      }
+      setUser(response.data.results)
+    }
+  }
+  useEffect(() => {
+    checkauth()
+  }, [])
+  
+
+  const login = async (credentials) => {
+
+    try {
+      const response = await authService.login(credentials);
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token); 
+        setUser(response.data.user);
+        setToken(response.data.token);
+      }
+      return response;
+    } catch (error) {
+      if (error.response) {
+        return error.response.data;
+      }
+    }
+  };
+
+  const isLogIn = () => {
+    return token;
+  };
+
+  const logout = () => {
+    setToken("");
+    setUser("");
+    localStorage.removeItem("token");
+    
+  };
+  const globalUserState = {
+    login,
+    user,
+    isLogIn,
+    token,
+    logout
+  };
+  return (
+    <UserContext.Provider value={globalUserState}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export default UserProvider;

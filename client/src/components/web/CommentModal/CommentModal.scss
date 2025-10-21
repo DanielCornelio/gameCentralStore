@@ -1,0 +1,24 @@
+@use '../../../styles/colors' as *;
+@use '../../../styles/forms' as *;
+
+.modal-content{
+    background-color: $background-dark-web;
+    color: $text-light;
+}
+// CSS para la solución alternativa
+.custom-floating-label {
+  // Eliminar el fondo blanco
+  .form-control:focus ~ label,
+  .form-control:not(:placeholder-shown) ~ label {
+    background: transparent !important;
+    &::after {
+      background: transparent !important;
+    }
+  }
+  
+  // Personalizar la apariencia
+  label {
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+  }
+}

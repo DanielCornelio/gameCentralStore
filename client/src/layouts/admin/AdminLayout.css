@@ -1,0 +1,26 @@
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "navbar navbar"
+    "lateralbar main"
+    "footer footer";
+  min-height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+.navbar {
+  grid-area: navbar;
+}
+.lateralbar {
+  grid-area: lateralbar;
+}
+.main {
+  grid-area: main;
+}
+.footer {
+  grid-area: footer;
+  bottom: 0;
+}
+.active {
+  font-weight: bold;
+}
