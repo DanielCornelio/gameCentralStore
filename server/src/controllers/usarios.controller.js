@@ -25,7 +25,7 @@ export const getUserByEmail = async (req, res) => {
 
 export const register = async (req, res) =>{
     try {
-        const {email, password_hash, username, nombre, apellido, pais,avatar_url,fecha_nacimiento} = req.body;
+        const {email, password_hash, username, nombre, apellido, pais, avatar_url, fecha_nacimiento} = req.body;
         if(!email || !password_hash){
             res.status(400).json({ message: 'Faltan datos obligatorios' })
             return;

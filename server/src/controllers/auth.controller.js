@@ -25,7 +25,7 @@ export const loginUser = async (req, res) => {
     });
 
     delete user.password_hash;
-
+    console.log(user)
     return res.status(200).json({ token, user });
   } catch (error) {
     res.status(500).json({ message: error.message });

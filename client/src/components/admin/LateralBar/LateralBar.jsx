@@ -10,7 +10,7 @@ export const LateralBar = () => {
     <Col md={2}>
       <Nav  className="lateralbar flex-column">
         {
-          token && user.rol == 'usuario' && (
+          token && user?.rol == 'usuario' && (
             <>
             <Nav.Link as={NavLink} to="/admin/profile">Cuenta</Nav.Link>
               <Nav.Link as={NavLink} to="/admin/security">Acceso</Nav.Link>
@@ -21,7 +21,7 @@ export const LateralBar = () => {
         }
               
         {
-          token && user.rol == 'admin' && (
+          token && user?.rol == 'admin' && (
             <>
             <Nav.Link as={NavLink} to="/admin/profile">Cuenta</Nav.Link>
               <Nav.Link as={NavLink} to="/admin/security">Acceso</Nav.Link>
