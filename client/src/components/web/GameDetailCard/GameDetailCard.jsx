@@ -4,6 +4,7 @@ import "./GameDetailCard.scss";
 import { Chip } from "../Chip/Chip";
 import { FaWindows } from "react-icons/fa";
 import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 
 export const GameDetailCard = ({ portada_url, titulo, genero,fecha_lanzamiento, descripcion, plataforma, precio, desarrollador}) => {
@@ -53,8 +54,8 @@ export const GameDetailCard = ({ portada_url, titulo, genero,fecha_lanzamiento, 
               <h2>$ {precio}</h2>
             </Stack>
             <Stack className="d-grid" gap={3}>
-              <Button size="lg">
-                Comprar ahora
+              <Button as={Link} to="/games" size="lg">
+                Seguir Comprando
               </Button>
               <Button size="lg" className="btn-secondary">Agregar al Carrito</Button>
             </Stack>

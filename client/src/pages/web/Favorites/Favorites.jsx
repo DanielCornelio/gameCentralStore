@@ -7,15 +7,10 @@ import { FavoriteGameCard } from '../../../components/web/FavoriteGameCard';
 import { Toaster } from 'react-hot-toast';
 
 export const Favorites = () => {
-    const { listFavorites, getFavorites } = useContext(FavoriteContext);
+    const { listFavorites, setListFavorite, getFavorites, removeFavorites} = useContext(FavoriteContext);
     const { user, token } = useContext(UserContext);
 
-    // Recargar favoritos cuando el componente se monte o cuando refreshKey cambie
-    useEffect(() => {
-        if (user && token) {
-            loadFavorites();
-        }
-    }, [user, token]);
+    
 
     const loadFavorites = async() =>{
          if (user && token) {
@@ -28,7 +23,8 @@ export const Favorites = () => {
     }
 
     const handleFavoriteRemoved = async () => {
-        await loadFavorites(); // Recargar la lista después de eliminar
+        await loadFavorites(); 
+        // Recargar la lista después de eliminar
     };
 
     if (!user) {
@@ -41,9 +37,16 @@ export const Favorites = () => {
         );
     }
 
+    // Recargar favoritos cuando el componente se monte o cuando refreshKey cambie
+    useEffect(() => {
+        if (user && token) {
+            loadFavorites();
+        }
+    }, [user, token]);
+
     return (
         <Container>
-            <Toaster position="top-right" reverseOrder={true} />
+             <Toaster position="top-right" reverseOrder={true} /> 
             <SectionTitle title='Tus Juegos Favoritos'/>
 
             {listFavorites.length === 0 ? (
