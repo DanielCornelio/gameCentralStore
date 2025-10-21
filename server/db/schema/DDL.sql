@@ -41,7 +41,7 @@ CREATE TABLE juegos (
     descripcion TEXT,
     precio DECIMAL(10,2) NOT NULL,
     precio_descuento DECIMAL(10,2),
-    desarrollador VARCHAR(100) NOT NULL,
+    desarrollador VARCHAR(100),
     fecha_lanzamiento DATE,
     portada_url VARCHAR(255),
     genero VARCHAR(50),

@@ -22,8 +22,8 @@ export const getUserByEmailModel = async (email) => {
 export const createUserModel = async ({email, password_hash, username, nombre, apellido, pais,avatar_url,fecha_nacimiento}) => {
     const hashedPassword = bcrypt.hashSync(password_hash, 10);
     const querySQL = {
-        text: 'INSERT INTO usuarios (email, password_hash, username, nombre, apellido, pais,avatar_url,fecha_nacimiento) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id, email, rol, activo, username,nombre, apellido, pais, avatar_url, fecha_nacimiento, fecha_creacion',
-        values: [email, hashedPassword,username, nombre, apellido, pais,avatar_url,fecha_nacimiento]
+        text: 'INSERT INTO usuarios (email, password_hash, username, nombre, apellido, pais, avatar_url,fecha_nacimiento) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id, email, rol, activo, username,nombre, apellido, pais, avatar_url, fecha_nacimiento, fecha_creacion',
+        values: [email, hashedPassword,username, nombre, apellido, pais, avatar_url, fecha_nacimiento]
     }
     const { rows: nuevoUsuario } = await pool.query(querySQL);
     return nuevoUsuario;

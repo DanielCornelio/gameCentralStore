@@ -78,19 +78,19 @@ export const getGameByIdModel = async (id) =>{
     return juego;
 }
 
-export const createGameModel = async ({titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima} ) => {
+export const createGameModel = async ({titulo, descripcion, precio, precio_descuento, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima} ) => {
     const querySQL = {
-        text: 'INSERT INTO juegos (titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
-        values: [titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima]
+        text: 'INSERT INTO juegos (titulo, descripcion, precio, precio_descuento, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+        values: [titulo, descripcion, precio, precio_descuento, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima]
     }
     const { rows: nuevoJuego } = await pool.query(querySQL);
     return nuevoJuego;
 } 
 
- export const updateGameModel = async ( {titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero, stock, plataforma, edad_minima, activo, id} ) => {
+ export const updateGameModel = async ( {titulo, descripcion, precio, precio_descuento, fecha_lanzamiento, portada_url, genero, stock, plataforma, edad_minima, activo, id} ) => {
     const querySQL = {
-        text: 'UPDATE juegos SET titulo=$1, descripcion=$2, precio=$3, precio_descuento=$4, desarrollador=$5, fecha_lanzamiento=$6, portada_url=$7, genero=$8, stock=$9, plataforma=$10, edad_minima=$11, activo=$12 WHERE id=$13 RETURNING *',
-        values: [titulo, descripcion, precio, precio_descuento, desarrollador, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima, activo, id]
+        text: 'UPDATE juegos SET titulo=$1, descripcion=$2, precio=$3, precio_descuento=$4, fecha_lanzamiento=$5, portada_url=$6, genero=$7, stock=$8, plataforma=$9, edad_minima=$10, activo=$11 WHERE id=$12 RETURNING *',
+        values: [titulo, descripcion, precio, precio_descuento, fecha_lanzamiento, portada_url, genero,stock, plataforma, edad_minima, activo, id]
     }
 
     const { rows: juegoActualizado} = await pool.query(querySQL)

@@ -64,6 +64,15 @@ export const Register2 = () => {
               }
             </div>
             <div>
+              <FloatingLabel label="Ingresa tu URL foto de Perfil">
+                <Form.Control 
+                  type="text" 
+                  placeholder="" 
+                  {...register("avatar_url")}
+                />
+              </FloatingLabel>
+            </div>
+            <div>
               <FloatingLabel label="Ingresa tu nombre">
                 <Form.Control 
                   type="text" 
