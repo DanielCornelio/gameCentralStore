@@ -70,7 +70,7 @@ export const LastGameCard = ({ id, portada_url, titulo, genero, descripcion, pla
               direction="horizontal"
               className="justify-content-between align-content-center"
             >
-              <h3 className="m-0">{titulo}</h3>
+              <h3 className="m-0 text-truncate" style={{width:'260px'}}>{titulo}</h3>
               <i 
                 onClick={handleLike} 
                 style={{ cursor: 'pointer' }}
@@ -94,9 +94,6 @@ export const LastGameCard = ({ id, portada_url, titulo, genero, descripcion, pla
               textOverflow: 'ellipsis',
               whiteSpace: 'normal'}}>{descripcion}</p>
             <div>
-              <Button size="sm" className="btn-primary ">
-                Comprar ${precio}
-              </Button>
             </div>
           </Stack>
         </Col>

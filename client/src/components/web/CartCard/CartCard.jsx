@@ -6,14 +6,13 @@ import { Chip } from '../Chip';
 
 
 export const CartCard = ({ id, titulo, portada_url, plataforma, genero, precio, count, eliminarCart }) => {
-    console.log(genero)
     return (
 
                 <Card className='cart__card d-flex flex-row'>
 
                     <div >
                         <div className='cart__card_image-container mb-2 me-3'>
-                            <Image className="cart__card_image" src={portada_url} alt={titulo} />
+                            <Image className="cart__card_image" src={portada_url} alt={titulo} style={{width:'105px', height:'150px'}} />
                         </div>
                         <span>{plataforma}</span>
                     </div>

@@ -84,7 +84,7 @@ export const GameDetail = () => {
       </Row>
       {
         user && (
-          <CommentModal showModal={showModal} setShowModal={setShowModal} usuario_id={user.id} juego_id={id} onCommentAdded={handleCommentAdded}/>
+          <CommentModal showModal={showModal} setShowModal={setShowModal} usuario_id={user.id} juego_id={id} onCommentAdded={handleCommentAdded} titulo={game.titulo}/>
         )
       }
 
