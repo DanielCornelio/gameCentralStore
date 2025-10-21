@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, Table, Button, Form, Alert, Badge, Stack } f
 import { Link } from 'react-router-dom';
 
 export const Cart = () => {
-  const { cart, incrementar, disminuir,total, subtotal } = useContext(CartContext)
+  const { cart, incrementar, disminuir,total, subtotal, eliminarCart } = useContext(CartContext)
 
   return (
     <Container className=''>
@@ -19,7 +19,7 @@ export const Cart = () => {
 
               {
                 cart?.map(item => (
-                  <CartCard key={item.id} {...item} incrementar={() => incrementar(item.id)} disminuir={() => disminuir(item.id)} />
+                  <CartCard key={item.id} {...item} incrementar={() => incrementar(item.id)} disminuir={() => disminuir(item.id)} eliminarCart={()=>eliminarCart(item.id)} />
 
                 ))
               }

@@ -4,7 +4,6 @@ export const CartContext = createContext();
 
 const CartProvider = ({children}) => {
     const [cart, setCart] = useState([])
-        console.log("cart", cart)
 
      const addToCart = ({ id, titulo, portada_url, plataforma, genero, precio, }) => {
         const productoEcontradoIndex = cart.findIndex((p) => p.titulo === titulo);
@@ -13,6 +12,7 @@ const CartProvider = ({children}) => {
         if (productoEcontradoIndex >= 0) {
           cart[productoEcontradoIndex].count++;
           setCart([...cart]);
+          
         } else {
           setCart([...cart, producto]);
         }
@@ -40,6 +40,11 @@ const CartProvider = ({children}) => {
         setCart(updatedCart);
       };
 
+      const eliminarCart = (id) => {
+        const updateCart = cart.filter(game => game.id != id)
+        setCart(updateCart)
+      }
+
       const subtotal = cart.reduce((total, game) => {
         return total + game.precio * game.count;
       }, 0);
@@ -52,7 +57,8 @@ const CartProvider = ({children}) => {
         incrementar,
         disminuir,
         total,
-        subtotal
+        subtotal,
+        eliminarCart
       }
 
       return <CartContext.Provider value={globalState}>{children}</CartContext.Provider>

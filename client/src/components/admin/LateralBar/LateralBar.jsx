@@ -9,11 +9,28 @@ export const LateralBar = () => {
   return (
     <Col md={2}>
       <Nav  className="lateralbar flex-column">
-        <Nav.Link as={NavLink} to="/admin/info">Cuenta</Nav.Link>
-        <Nav.Link as={NavLink} to="/admin/security">Acceso</Nav.Link>
-        
-        <hr/>
-        <Nav.Link as={NavLink} to="/admin/products">Productos</Nav.Link>
+        {
+          token && user.rol == 'usuario' && (
+            <>
+            <Nav.Link as={NavLink} to="/admin/profile">Cuenta</Nav.Link>
+              <Nav.Link as={NavLink} to="/admin/security">Acceso</Nav.Link>
+          
+            </>
+            
+          )
+        }
+              
+        {
+          token && user.rol == 'admin' && (
+            <>
+            <Nav.Link as={NavLink} to="/admin/profile">Cuenta</Nav.Link>
+              <Nav.Link as={NavLink} to="/admin/security">Acceso</Nav.Link>
+            <hr/>
+            <Nav.Link as={NavLink} to="/admin/products">Productos</Nav.Link>
+            </>
+            
+          )
+        }
 
     </Nav>
     </Col>
