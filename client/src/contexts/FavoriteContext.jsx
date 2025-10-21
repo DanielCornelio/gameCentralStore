@@ -32,6 +32,7 @@ const FavoriteProvider = ({ children }) => {
         // Actualizar la lista local después de eliminar
         const updateList = getFavorites()
         setListFavorites(updateList);
+        getFavorites()
         toast.success("Eliminado de favoritos");
       }
       return response;
@@ -59,7 +60,7 @@ const FavoriteProvider = ({ children }) => {
 
       // Verificación segura de la respuesta
       if (response && response.data) {
-        setListFavorites(response.data.results || response.data || []);
+        setListFavorites(response.data.results );
       } else {
         setListFavorites([]);
       }

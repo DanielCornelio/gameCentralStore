@@ -55,7 +55,7 @@ export const GameDetail = () => {
 
   return (
     <Container>
-      <Toaster position="top-right" reverseOrder={true} />
+      {/* <Toaster position="top-right" reverseOrder={true} /> */}
       <GameDetailCard {...game} />
       <SectionTitle title="Comentarios" />
       <Row className="mb-5">

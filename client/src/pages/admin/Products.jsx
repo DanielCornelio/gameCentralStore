@@ -52,11 +52,9 @@ export const Products = () => {
         productoEditando.id, 
         productoActualizado
       );
-      console.log(response)
       toast.success(response.data.message || "Producto actualizado correctamente");
       handleCommentAdded();
     } catch (error) {
-      console.log(error)
       toast.error(error.data.message || "Error al actualizar el producto");
     }
   };

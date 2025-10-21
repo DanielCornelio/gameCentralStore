@@ -10,7 +10,7 @@ import { UserContext } from '../../../contexts/UserContext';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-export const FavoriteGameCard = ({ id, usuario_id, juego_id, portada_url, titulo, genero, plataforma, precio }) => {
+export const FavoriteGameCard = ({ id, usuario_id, juego_id, portada_url, titulo, genero, plataforma, precio, onFavoriteRemoved }) => {
   // const {id, portada_url, titulo, genero, plataforma, precio} = game;
   const navigate = useNavigate();
   const goToGame = () => navigate(`/games/${juego_id}`)
@@ -19,7 +19,7 @@ export const FavoriteGameCard = ({ id, usuario_id, juego_id, portada_url, titulo
   const gameAdded = { id, portada_url, titulo, genero, plataforma, precio }
 
  const [isLiked, setIsLiked] = useState(false);
-  const { addFavorite, removeFavorites, listFavorites, setListFavorites} = useContext(FavoriteContext);
+  const { addFavorite, removeFavorites, listFavorites, setListFavorites, getFavorites} = useContext(FavoriteContext);
   const { user, token } = useContext(UserContext);
 
 
@@ -48,6 +48,7 @@ const handleLike = async () => {
         // Remover de favoritos
         const response = await removeFavorites(data);
         setListFavorites(listFavorites)
+        getFavorites()
         if (!response.error) {
           setIsLiked(false);
           toast.success("El juego se ha eliminado de tus favoritos")
