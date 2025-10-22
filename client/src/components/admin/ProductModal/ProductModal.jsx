@@ -26,10 +26,8 @@ export const ProductModal = ({ showModal, setShowModal, onCommentAdded, productE
 
   const activoValue = watch("activo");
 
-  // 🔥 Efecto para prellenar formulario cuando hay edición
   useEffect(() => {
     if (productEdit) {
-      // Prellenar todos los campos con los datos del producto a editar
       setValue("titulo", productEdit.titulo);
       setValue("portada_url", productEdit.portada_url);
       setValue("descripcion", productEdit.descripcion);
@@ -39,7 +37,6 @@ export const ProductModal = ({ showModal, setShowModal, onCommentAdded, productE
       setValue("genero", productEdit.genero);
       setValue("activo", productEdit.activo);
     } else {
-      // Resetear formulario para nuevo producto
       reset({
         titulo: "",
         portada_url: "",
@@ -59,13 +56,9 @@ export const ProductModal = ({ showModal, setShowModal, onCommentAdded, productE
     onCommentAdded()
   }
 
-
-
-  
   const onSubmit = handleSubmit(async (data) => {
     try {
       if (productEdit) {
-        // 🔥 MODO EDICIÓN - Usar onUpdate
         await onUpdate(data);
 
       } else {
@@ -76,7 +69,7 @@ export const ProductModal = ({ showModal, setShowModal, onCommentAdded, productE
       toast.success(response.message);
       reset();
       if (onCommentAdded) {
-        onCommentAdded(); // Llamar a la función de éxito
+        onCommentAdded(); 
       }
     }
     } catch (error) {
