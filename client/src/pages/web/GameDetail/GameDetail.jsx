@@ -4,7 +4,6 @@ import { GameDetailCard, SectionTitle, RatingComments, CommentModal } from "../.
 import { CommentCard } from "../../../components/web/CommentCard/CommentCard";
 import { useLocation, useParams } from "react-router-dom";
 import {Toaster, toast} from "react-hot-toast";
-import { gamesData } from "../../../data/games";
 import gamesService from "../../../api/games";
 import ratingsService from "../../../api/ratings";
 import { UserContext } from "../../../contexts/UserContext";

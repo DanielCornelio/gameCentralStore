@@ -7,6 +7,7 @@ import {
   FormControl,
   Button,
   NavDropdown,
+  Image,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser, FaSignInAlt } from "react-icons/fa";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -14,8 +15,9 @@ import "./TopBar.scss";
 import { UserContext } from "../../../contexts/UserContext";
 import { IoHeartSharp } from "react-icons/io5";
 import { CartContext } from "../../../contexts/CartContext";
+import logo from '../../../assets/game.svg'
 
-export const TopBar = ({ cartCount = 0 }) => {
+export const TopBar = () => {
   const { user, token, logout } = useContext(UserContext);
   const {cart} = useContext(CartContext)
   const navigate = useNavigate()
@@ -33,7 +35,10 @@ export const TopBar = ({ cartCount = 0 }) => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className="navbar-brand">
+        <div>
+          <Image src={logo} atl='logo' style={{width:'40px', marginRight:'10px'}}/>
           GameCentral
+        </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="topbar-navbar-nav" />
         <Navbar.Collapse id="topbar-navbar-nav">

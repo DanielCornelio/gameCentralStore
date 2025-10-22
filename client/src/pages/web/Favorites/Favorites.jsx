@@ -46,7 +46,7 @@ export const Favorites = () => {
 
     return (
         <Container>
-             <Toaster position="top-right" reverseOrder={true} /> 
+             <Toaster position="bottom-left" reverseOrder={true} /> 
             <SectionTitle title='Tus Juegos Favoritos'/>
 
             {listFavorites.length === 0 ? (

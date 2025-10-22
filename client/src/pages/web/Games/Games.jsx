@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, FloatingLabel, Button } from "react-bootstrap";
 import { Toaster, toast } from "react-hot-toast";
-import { genres, platforms } from "../../../data/games";
-import { useGameFilters } from "../../../hooks/useGameFilters";
-import { SearchAndFilters, GameCard } from "../../../components/web";
+import { GameCard } from "../../../components/web";
 import gamesService from "../../../api/games";
 import "./Games.scss";
 import { SectionTitle } from "../../../components";
@@ -11,10 +9,12 @@ import { useForm } from "react-hook-form";
 
 export const Games = () => {
   const [games, setGames] = useState([]);
+  const [filter, setFilter] = useState({});
 
   const {
     register,
-    handleSubmit
+    handleSubmit,
+    watch
   } = useForm();
 
   // Función para obtener los juegos desde la API (como en home.jsx)
@@ -32,14 +32,24 @@ export const Games = () => {
     getGames();
   }, []);
 
-  const onSubmit = handleSubmit(async(data) => {
+  const onSubmit=(async(data) => {
     try {
+      setFilter(data)
+      debugger
       const response = await gamesService.getGamesFilters(data)
+      console.log(response.games)
       setGames(response.games)
     } catch (error) {
       console.log(error)
     }
   })
+
+  const handleChangeLimit = async(l) => {
+      
+      await onSubmit({...filter, limit:l})
+  }
+
+
 
   return (
     <Container className="games-page">
@@ -48,7 +58,7 @@ export const Games = () => {
       <SectionTitle title="Store" />
 
       <Row className="mb-5">
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={handleSubmit((data)=>{onSubmit(data)})}>
           <div className="mb-4">
             <FloatingLabel label="Titulo">
               <Form.Control
@@ -93,9 +103,20 @@ export const Games = () => {
               </Form.Select>
             </FloatingLabel>
           </Col>
-          <Col><Button type="submit">Filtrar</Button></Col>
+          <Col><Button  type="submit">Filtrar</Button></Col>
           </div>
         </Form>
+      </Row>
+      <Row className="d-flex justify-content-end mb-5">
+        <Col md={1}>
+            <FloatingLabel label="Mostrar">
+              <Form.Select onChange={(e)=>handleChangeLimit(e.target.value)} className="text-center">
+                <option value="10">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </Form.Select>
+            </FloatingLabel>
+          </Col>
       </Row>
 
       <Row>
