@@ -32,13 +32,14 @@ const gamesService = {
      getGamesFilters: async (params = {}) => {
     try {
         const { 
-            limit = 10, 
+          
             order_by, 
             page = 1, 
             titulo, 
             genero, 
             plataforma 
         } = params;
+        const limit = params.limit?params.limit:10
 
         const response = await client.get('/juegos', {
             params: {

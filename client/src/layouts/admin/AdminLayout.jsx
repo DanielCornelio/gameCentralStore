@@ -5,6 +5,7 @@ import { Footer } from '../../components/common/Footer/Footer'
 import { LateralBar } from '../../components'
 import './AdminLayout.css'
 import { Container } from 'react-bootstrap'
+import { Toaster } from 'react-hot-toast'
 
 
 const AdminLayout = () => {
@@ -12,6 +13,8 @@ const AdminLayout = () => {
     <div className='grid-container'>
       <TopBar />
       <Container className='d-flex'>
+      <Toaster position="bottom-left" reverseOrder={false} />
+
         <LateralBar/>
         <Outlet />
       </Container>

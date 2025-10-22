@@ -1,4 +1,4 @@
-import { Container, Row, Col, Stack, Nav } from "react-bootstrap";
+import { Container, Row, Col, Stack, Nav, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import {
   FaGooglePlay,
@@ -10,6 +10,7 @@ import {
 import { MarketplaceCard } from "../../../components/web/MarketplaceCard/MarketplaceCard";
 import React from "react";
 import "./Footer.scss";
+import logo from '../../../assets/game.svg'
 
 export const Footer = () => {
   return (
@@ -19,6 +20,7 @@ export const Footer = () => {
           {/* Logo y descripción */}
           <Col md={3} className="mb-3">
             <Stack gap={2}>
+              <Image src={logo} alt='logo' style={{width:'80px'}}/>
               <h5>Game Central Store</h5>
               <p>Tu punto de encuentro para la aventura</p>
             </Stack>
