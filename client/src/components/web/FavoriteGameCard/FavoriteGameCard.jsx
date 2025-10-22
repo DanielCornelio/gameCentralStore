@@ -51,7 +51,7 @@ const handleLike = async () => {
         getFavorites()
         if (!response.error) {
           setIsLiked(false);
-          toast.success("El juego se ha eliminado de tus favoritos")
+          toast.success(response.message)
         }
       } else {
         // Agregar a favoritos

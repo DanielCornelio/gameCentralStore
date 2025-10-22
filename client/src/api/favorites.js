@@ -21,7 +21,7 @@ const favoritesService = {
         try {
             
             const response = await client.delete("/favoritos", {data})
-            return { data: response.data, status: response.status, error: false, message: "ok" };
+            return { data: response.data, status: response.status, error: false, message: response.data.message };
         } catch (error) {
             return { data: null, status: error.response.status, error: true, message: error.response.data.message };
         }

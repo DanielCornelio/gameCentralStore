@@ -28,7 +28,6 @@ export const Home = () => {
 
   return (
     <Container>
-      <Toaster position="bottom-left" reverseOrder={false} />
       <Row>
         <Col xs={12}>
           <Carrousel />
@@ -47,7 +46,7 @@ export const Home = () => {
       
       <SectionTitle title="Juegos destacados" />
       <Row>
-        {games.map((game) => (
+        {games.slice(0,4).map((game) => (
           <Col key={game.id} xs={12} md={6} lg={3} className="mb-4">
             <GameCard {...game} />
           </Col>

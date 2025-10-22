@@ -28,12 +28,12 @@ const FavoriteProvider = ({ children }) => {
   const removeFavorites = async (data) => {
     try {
       const response = await favoritesService.removeFavorites(data);
-      if (response.success) {
+      if (!response.error) {
         // Actualizar la lista local después de eliminar
         const updateList = getFavorites()
         setListFavorites(updateList);
         getFavorites()
-        toast.success("Eliminado de favoritos");
+        // toast.success(response.message);
       }
       return response;
     } catch (error) {
